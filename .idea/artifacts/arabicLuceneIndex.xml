@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="arabicLuceneIndex">
+    <output-path>$PROJECT_DIR$/out/Quran/arabicLuceneIndex</output-path>
+    <root id="root">
+      <element id="dir-copy" path="$PROJECT_DIR$/arabicLuceneIndex" />
+    </root>
+  </artifact>
+</component>

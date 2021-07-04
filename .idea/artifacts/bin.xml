@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="bin">
+    <output-path>$PROJECT_DIR$/out/Quran/bin</output-path>
+    <root id="root">
+      <element id="dir-copy" path="$PROJECT_DIR$/bin" />
+    </root>
+  </artifact>
+</component>

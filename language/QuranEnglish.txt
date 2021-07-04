@@ -1,0 +1,42 @@
+New version of Quran Encyclopedia 
+Holy Quran
+Page 
+---- Default in English ------
+---- Default in English ------
+---- Default in English ------
+---- Default in English ------
+---- Default in English ------
+---- Default in English ------
+---- Default in English ------
+---- Default in English ------
+---- Default in English ------
+---- Default in English ------
+---- Default in English ------
+---- Default in English ------
+---- Default in English ------
+Part 
+Hezp 
+New version
+File
+Updates List
+Exit
+Selection
+Start
+Repeat settings
+About
+Preferences
+Help
+Help Contents
+From: 
+To: 
+Stop
+Error
+The order of the starting Sura is coming after the Sura you want to stop at.
+Continue
+You cannot read Quran in opposite way !
+Search
+Tafseer
+Listening
+---- Only in Arabic ------
+---- Only in Arabic ------
+---- Only in Arabic ------

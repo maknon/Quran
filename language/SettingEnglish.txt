@@ -1,0 +1,17 @@
+Setting
+Choose the language to be used in the program
+العربية
+English
+Information
+---------------------
+Cancel
+Apply
+Holy Quran audio file's location
+The program will restart to apply the language changes.
+Browse
+Open
+Local
+Internet
+Continue
+New versions
+Search for new versions at statup

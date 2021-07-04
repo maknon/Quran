@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="arabicRootsTableIndex">
+    <output-path>$PROJECT_DIR$/out/Quran/arabicRootsTableIndex</output-path>
+    <root id="root">
+      <element id="dir-copy" path="$PROJECT_DIR$/arabicRootsTableIndex" />
+    </root>
+  </artifact>
+</component>

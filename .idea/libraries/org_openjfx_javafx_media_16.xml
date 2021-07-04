@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="org.openjfx:javafx-media:16" type="repository">
+    <properties maven-id="org.openjfx:javafx-media:16" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/javafx-media-16.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-media-16-win.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-graphics-16.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-graphics-16-win.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-base-16.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-base-16-win.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

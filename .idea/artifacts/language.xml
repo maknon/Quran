@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="language">
+    <output-path>$PROJECT_DIR$/out/Quran/language</output-path>
+    <root id="root">
+      <element id="dir-copy" path="$PROJECT_DIR$/language" />
+    </root>
+  </artifact>
+</component>

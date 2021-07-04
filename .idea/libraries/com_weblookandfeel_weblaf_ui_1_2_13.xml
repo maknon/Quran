@@ -1,0 +1,18 @@
+<component name="libraryTable">
+  <library name="com.weblookandfeel:weblaf-ui:1.2.13" type="repository">
+    <properties maven-id="com.weblookandfeel:weblaf-ui:1.2.13" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/weblaf-ui-1.2.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/weblaf-core-1.2.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xstream-1.4.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jericho-html-3.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/java-image-scaling-0.8.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/filters-2.0.235.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.7.27.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/svg-salamander-1.1.2.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rsyntaxtextarea-2.6.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

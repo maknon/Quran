@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="net.sf.ucanaccess:ucanaccess:5.0.1" type="repository">
+    <properties maven-id="net.sf.ucanaccess:ucanaccess:5.0.1" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/net/sf/ucanaccess/ucanaccess/5.0.1/ucanaccess-5.0.1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/hsqldb/hsqldb/2.5.0/hsqldb-2.5.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/healthmarketscience/jackcess/jackcess/3.0.1/jackcess-3.0.1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-lang3/3.8.1/commons-lang3-3.8.1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.2/commons-logging-1.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

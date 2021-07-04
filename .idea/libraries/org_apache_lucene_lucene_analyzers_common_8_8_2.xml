@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="org.apache.lucene:lucene-analyzers-common:8.8.2" type="repository">
+    <properties maven-id="org.apache.lucene:lucene-analyzers-common:8.8.2" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/lucene-analyzers-common-8.8.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lucene-core-8.8.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleName</key>
+	<string>القرآن الكريم</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CFBundleExecutable</key>
+	<string>JavaApplicationStub</string>
+	<key>CFBundleIconFile</key>
+	<string>icon_0.icns</string>
+	<key>CFBundleDocumentTypes</key>
+	<key>Java</key>
+	<dict>
+		<key>MainClass</key>
+		<string>classes.Quran</string>
+		<key>SplashFile</key>
+		<string>$JAVAROOT/images_X/quran.png</string>
+		<key>WorkingDirectory</key>
+		<string>$JAVAROOT</string>
+		<key>JVMVersion</key>
+		<string>1.8+</string>
+		<key>ClassPath</key>
+		<array>
+			<string>$JAVAROOT</string>
+			<string>$JAVAROOT/lib/h2.jar</string>
+			<string>$JAVAROOT/lib/weblaf.jar</string>
+			<string>$JAVAROOT/lib/lucene.jar</string>
+			<string>$JAVAROOT/lib/lucene-highlighter.jar</string>
+			<string>$JAVAROOT/lib/lucene-analyzers.jar</string>
+			<string>$JAVAROOT/lib/lucene-memory.jar</string>
+			<string>$JAVAROOT/lib/lucene-queryparser.jar</string>
+		</array>
+		<key>VMOptions</key>
+		<array>
+			<string>-Dapple.awt.graphics.UseQuartz=true</string>
+		</array>
+	</dict>
+</dict>
+</plist>

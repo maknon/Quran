@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="pages-hafs">
+    <output-path>$PROJECT_DIR$/out/Quran/pages-hafs</output-path>
+    <root id="root">
+      <element id="dir-copy" path="$PROJECT_DIR$/pages-hafs" />
+    </root>
+  </artifact>
+</component>

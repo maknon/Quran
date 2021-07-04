@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact name="pages-warsh">
+    <output-path>$PROJECT_DIR$/out/Quran/pages-warsh</output-path>
+    <root id="root">
+      <element id="dir-copy" path="$PROJECT_DIR$/pages-warsh" />
+    </root>
+  </artifact>
+</component>

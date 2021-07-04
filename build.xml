@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Build" basedir="." default="win_exe">
+
+	<property name="build.dir"				value="build"/>
+	<property name="app.name"				value="القرآن العظيم"/>
+	<property name="tools.dir"				value="E:\Others\MIE Support programs"/>
+	<property name="makensis.exe"			value="${tools.dir}\nsis\makensis.exe"/>
+	<property name="launch4j.jar"			value="${tools.dir}\launch4j\launch4j.jar"/>
+	<property name="jdk.linux"				value="openjdk-15_linux-x64_bin.tar.gz"/>
+	<property name="jdk.mac"				value="openjdk-15_osx-x64_bin.tar.gz"/>
+	<property name="jdk.win"				value="openjdk-15_windows-x64_bin.zip"/>
+	<property name="java.old"				value="C:\Users\Ebrahim\Desktop\zulu8.46.0.19-ca-jdk8.0.252-win_x64\bin\java"/>
+
+	<path id="class.path">
+		<fileset dir="${build.dir}" includes="lib/*"/>
+	</path>
+
+	<target name="clean">
+		<delete dir="${build.dir}"/>
+	</target>
+
+	<target name="copy_resources_windows">
+		<copy todir="${build.dir}">
+			<fileset dir="." includes="setting/**,db/**,arabicIndex/**,src/**,
+			arabicLuceneIndex/**,pages-hafs/**,bin/**,images/**,images_X/**,
+			language/**,lib/**,arabicRootsIndex/**,arabicRootsTableIndex/**,
+			setup.nsi,quran.xml,startup.bat,launcher.xml,launcher.bat">
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="compile_windows">
+		<antcall target="copy_resources_windows"/>
+		<antcall target="javac_src"/>
+	</target>
+
+	<target name="javac_src">
+		<exec dir="${build.dir}" executable="cmd" failonerror="true" />
+		<javac includeantruntime="false"
+			   srcdir="${build.dir}/src"
+			   destdir="${build.dir}"
+			   encoding="UTF-8"
+			   classpathref="class.path"/>
+	</target>
+
+	<path id="build-classpath">
+		<fileset dir="${build.dir}/lib">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+
+	<target name="jar">
+		<pathconvert property="manifest.classpath" pathsep=" ">
+			<path refid="build-classpath"/>
+			<mapper>
+				<chainedmapper>
+					<flattenmapper/>
+					<globmapper from="*.jar" to="lib/*.jar"/>
+				</chainedmapper>
+			</mapper>
+		</pathconvert>
+		<jar destfile="${build.dir}/quran.jar" basedir="${build.dir}" includes="images/quran.png">
+			<manifest>
+				<attribute name="Main-Class" value="classes.Quran"/>
+				<attribute name="Class-Path" value=". ${manifest.classpath}"/>
+				<attribute name="SplashScreen-Image" value="images/quran.png"/>
+			</manifest>
+		</jar>
+		<jar destfile="${build.dir}/launcher.jar">
+			<manifest>
+				<attribute name="Main-Class" value="classes.Launcher"/>
+				<attribute name="Class-Path" value=". ${manifest.classpath}"/>
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="jdk_win">
+		<unzip src="${tools.dir}/${jdk.win}" dest="${build.dir}/jdk">
+			<cutdirsmapper dirs="1" />
+		</unzip>
+		<delete includeEmptyDirs="true">
+			<fileset dir="${build.dir}/jdk">
+				<include name="jmods/**"/>
+				<include name="demo/**"/>
+				<include name="legal/**"/>
+				<include name="lib/src.zip"/>
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="launch4j">
+		<exec dir="${build.dir}" executable="cmd" failonerror="true" >
+			<arg value="/c"/>
+			<arg value='"${java.old}" -Dfile.encoding=windows-1252 -jar "${launch4j.jar}" quran.xml'/>
+		</exec>
+		<exec dir="${build.dir}" executable="cmd" failonerror="true" >
+			<arg value="/c"/>
+			<arg value='"${java.old}" -Dfile.encoding=windows-1252 -jar "${launch4j.jar}" launcher.xml'/>
+		</exec>
+	</target>
+
+	<target name="nsis">
+		<exec dir="${build.dir}" executable="${makensis.exe}" failonerror="true" >
+			<arg value="setup.nsi"/>
+		</exec>
+	</target>
+	
+	<target name="tar_gz_win">
+		<tar destfile="${build.dir}/QuranWin64.tar.gz" compression="gzip">
+			<tarfileset filemode="755" dir="${build.dir}">
+				<include name="**"/>
+				<exclude name="src/**"/>
+				<exclude name="images_X/**"/>
+				<exclude name="quran.xml"/>
+				<exclude name="setup.nsi"/>
+				<exclude name="launcher.xml"/>
+				<exclude name="launcher.jar"/>
+				<exclude name="Launcher.exe"/>
+				<exclude name="launcher.bat"/>
+			</tarfileset>
+		</tar>
+	</target>
+
+	<target name="win" depends="clean,compile_windows,jar,jdk_win,launch4j,tar_gz_win"/>
+	<target name="win_exe" depends="clean,compile_windows,jar,jdk_win,launch4j,nsis"/>
+	
+</project>

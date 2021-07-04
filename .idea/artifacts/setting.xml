@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="setting">
+    <output-path>$PROJECT_DIR$/out/Quran/setting</output-path>
+    <root id="root">
+      <element id="dir-copy" path="$PROJECT_DIR$/setting" />
+    </root>
+  </artifact>
+</component>
