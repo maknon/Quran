@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="org.apache.pdfbox:xmpbox:3.0.0-RC1" type="repository">
+    <properties maven-id="org.apache.pdfbox:xmpbox:3.0.0-RC1" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/pdfbox/xmpbox/3.0.0-RC1/xmpbox-3.0.0-RC1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.2/commons-logging-1.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
