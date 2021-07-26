@@ -14,8 +14,8 @@ import static com.itextpdf.kernel.pdf.PdfViewerPreferences.PdfViewerPreferencesC
 
 public class CreatePDF_iText_Pdf
 {
-	final static boolean mobile = false;
-	final static boolean hafs = false;
+	final static boolean mobile = true;
+	final static boolean hafs = true;
 
 	String p = "C:/Users/Ebrahim/Desktop/Quran/";
 	String v = "1.2";

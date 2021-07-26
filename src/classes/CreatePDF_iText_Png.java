@@ -18,11 +18,11 @@ import static com.itextpdf.kernel.pdf.PdfViewerPreferences.PdfViewerPreferencesC
 
 public class CreatePDF_iText_Png
 {
-	final static boolean hafs = false;
+	final static boolean hafs = true;
 
 	String p = "C:/Users/Ebrahim/Desktop/Quran/";
-	String src_hafs = p + "hafs-mobile-png-background/";
-	String src_warsh = p + "warsh-mobile-png-background/";
+	String src_hafs = p + "hafs-mobile-png/";
+	String src_warsh = p + "warsh-mobile-png/";
 	String v = "1.2";
 
 	CreatePDF_iText_Png() throws Exception
