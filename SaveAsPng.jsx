@@ -11,7 +11,6 @@ for ( i = 0; i < files.length; i++ )
 {
 	app.open(files[i]);
 
-	//alert( files[i].name, "Script Alert", true);
 	app.activeDocument.selectObjectsOnActiveArtboard();
 	app.activeDocument.fitArtboardToSelectedArt(0);
 	
