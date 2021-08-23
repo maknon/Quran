@@ -32,9 +32,9 @@ public class CreatePDF_PdfBox_Png
 {
 	final static boolean hafs = true;
 
-	String src_hafs = "C:/Users/Ebrahim/Desktop/Quran/hafs-mobile-png/";
-	String src_warsh = "C:/Users/Ebrahim/Desktop/Quran/warsh-mobile-png/";
-	String p = "C:/Users/Ebrahim/Desktop/Quran/";
+	String src_hafs = "F:/Quran/hafs-mobile-png/";
+	String src_warsh = "F:/Quran/warsh-mobile-png/";
+	String p = "F:/Quran/";
 	String v = "1.2";
 
 	CreatePDF_PdfBox_Png()

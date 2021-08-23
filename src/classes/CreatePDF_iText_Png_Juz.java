@@ -19,7 +19,7 @@ public class CreatePDF_iText_Png_Juz
 {
 	final static boolean hafs = true;
 
-	String p = "C:/Users/Ebrahim/Desktop/Quran/";
+	String p = "F:/Quran/";
 	String src_hafs = p + "hafs-mobile-png/";
 	String src_warsh = p + "warsh-mobile-png/";
 	String v = "1.2";

@@ -17,7 +17,7 @@ public class CreatePDF_iText_Pdf
 	final static boolean mobile = true;
 	final static boolean hafs = true;
 
-	String p = "C:/Users/Ebrahim/Desktop/Quran/";
+	String p = "F:/Quran/";
 	String v = "1.2";
 
 	CreatePDF_iText_Pdf() throws IOException

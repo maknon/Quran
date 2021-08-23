@@ -1,21 +1,17 @@
 package classes;
 
-import com.itextpdf.io.image.ImageData;
-import com.itextpdf.io.image.ImageDataFactory;
-import com.itextpdf.kernel.geom.PageSize;
-import com.itextpdf.kernel.geom.Rectangle;
 import com.itextpdf.kernel.pdf.*;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Image;
+import com.itextpdf.kernel.utils.PdfMerger;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 
-import static classes.CreatePDF_QuranDb.*;
+import static classes.CreatePDF_QuranDb.hezp_page;
+import static classes.CreatePDF_QuranDb.hezp_end_page;
 import static com.itextpdf.kernel.pdf.PdfViewerPreferences.PdfViewerPreferencesConstants.RIGHT_TO_LEFT;
 
-public class CreatePDF_iText_Png_Sura
+public class CreatePDF_iText_Hezp
 {
 	final static boolean hafs = true;
 
@@ -24,15 +20,15 @@ public class CreatePDF_iText_Png_Sura
 	String src_warsh = p + "warsh-mobile-png/";
 	String v = "1.2";
 
-	CreatePDF_iText_Png_Sura() throws IOException
+	CreatePDF_iText_Hezp() throws IOException
 	{
 		final String title = hafs ? "القرآن الكريم برواية حفص" : "القرآن الكريم برواية ورش";
 		final String creator = "إعداد موقع مكنون";
 		final String subject = "Holy Quran in " + (hafs ? "Hafs" : "Warsh");
 
-		for (int k = 0; k < 114; k++)
+		for (int k = 0; k < 60; k++)
 		{
-			final PdfDocument pdfDocument = new PdfDocument(new PdfWriter(p + (hafs ? "quran_hafs_ms" : "quran_warsh_ms") + (k + 1) + ".pdf"
+			final PdfDocument pdfDocument = new PdfDocument(new PdfWriter(p + (hafs ? "quran_hafs_mh" : "quran_warsh_mh") + (k + 1) + ".pdf"
 					, new WriterProperties()
 					.addXmpMetadata()
 					.setFullCompressionMode(true) // reduce 0.5%
@@ -52,17 +48,32 @@ public class CreatePDF_iText_Png_Sura
 			info.setTitle(title);
 			info.setAuthor(creator);
 			info.setSubject(subject);
-			info.setKeywords("سورة " + sura_ar[k]);
+			info.setKeywords("الجزء " + (k + 1));
 			info.setMoreInfo(new String("النسخة".getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1), v);
 			info.setMoreInfo(new String("المصدر".getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1), "https://www.maknoon.com/community/threads/164");
 
 			info.setCreator("©2021 maknoon.com");
 
+			final PdfMerger merger = new PdfMerger(pdfDocument, false, false);
+
+			final DecimalFormat formatter = new DecimalFormat("000");
+			for (int i = hezp_page[k]; i <= hezp_end_page[k]; i++)
+			{
+				final String f = formatter.format(i);
+				final PdfDocument doc = new PdfDocument(new PdfReader(hafs ?
+						(p + "hafs-mobile-pdf/" + f + "___Hafs39__DM.pdf") :
+						(p + "warsh-mobile-pdf/" + f + "___Warsh39__DM.pdf")
+				));
+				merger.merge(doc, 1, 1);
+				doc.close();
+			}
+
+			/*
 			final Document document = new Document(pdfDocument);
 			document.setMargins(0, 0, 0, 0);
 
 			final DecimalFormat formatter = new DecimalFormat("000");
-			for (int i = sura_page[k]; i <= sura_end_page[k]; i++)
+			for (int i = hezp_page[k]; i < (k == 59 ? 605 : hezp_page[k + 1]); i++)
 			{
 				final String f = formatter.format(i);
 				final ImageData imageData = ImageDataFactory.create((hafs ?
@@ -75,14 +86,15 @@ public class CreatePDF_iText_Png_Sura
 
 				document.add(image);
 			}
-
 			document.close();
+			*/
+
 			pdfDocument.close();
 		}
 	}
 
 	public static void main(String[] args) throws IOException
 	{
-		new CreatePDF_iText_Png_Sura();
+		new CreatePDF_iText_Hezp();
 	}
 }

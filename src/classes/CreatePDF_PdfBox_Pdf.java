@@ -36,7 +36,7 @@ public class CreatePDF_PdfBox_Pdf
 	final static boolean mobile = false;
 	final static boolean hafs = false;
 
-	String p = "C:/Users/Ebrahim/Desktop/Quran/";
+	String p = "F:/Quran/";
 	String v = "1.2";
 
 	CreatePDF_PdfBox_Pdf()
