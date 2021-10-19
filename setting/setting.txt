@@ -1,4 +1,3 @@
 nothing
 true
 [unknown]
-true

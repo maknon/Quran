@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import java.awt.event.*;
+import java.nio.charset.StandardCharsets;
 
 class DefaultLanguage extends JDialog
 {
@@ -51,11 +52,10 @@ class DefaultLanguage extends JDialog
 
 				try
 				{
-					final OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream("setting/setting.txt"), "UTF-8");
-					out.write(Quran.language+lineSeparator);
-					out.write(quran.internetStreaming+lineSeparator);
-					out.write(quran.audioLocation+lineSeparator);
-					out.write(String.valueOf(quran.versionUpdateNotifier));
+					final OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream("setting/setting.txt"), StandardCharsets.UTF_8);
+					out.write(Quran.language + lineSeparator);
+					out.write(quran.internetStreaming + lineSeparator);
+					out.write(quran.audioLocation);
 					out.close();
 				}
 				catch(Exception ex){ex.printStackTrace();}

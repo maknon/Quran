@@ -10,9 +10,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="library" name="org.openjfx:javafx-media:16" level="project" />
-    <orderEntry type="library" name="org.openjfx:javafx-swing:16" level="project" />
-    <orderEntry type="library" name="com.weblookandfeel:weblaf-ui:1.2.13" level="project" />
+    <orderEntry type="library" name="org.openjfx:javafx-media" level="project" />
+    <orderEntry type="library" name="org.openjfx:javafx-swing" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -22,17 +21,18 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="net.sf.ucanaccess:ucanaccess" level="project" />
+    <orderEntry type="library" name="org.apache.derby:derby" level="project" />
+    <orderEntry type="library" name="org.apache.lucene:lucene-highlighter" level="project" />
+    <orderEntry type="library" name="org.apache.lucene:lucene-queryparser" level="project" />
+    <orderEntry type="library" name="org.apache.lucene:lucene-analyzers-common" level="project" />
+    <orderEntry type="library" name="org.apache.derby:derbytools" level="project" />
+    <orderEntry type="library" name="org.apache.pdfbox:pdfbox" level="project" />
+    <orderEntry type="library" name="org.apache.pdfbox:xmpbox" level="project" />
+    <orderEntry type="library" name="com.itextpdf:kernel" level="project" />
+    <orderEntry type="library" name="com.itextpdf:layout" level="project" />
+    <orderEntry type="library" name="org.xerial:sqlite-jdbc" level="project" />
+    <orderEntry type="library" name="formdev.flatlaf" level="project" />
     <orderEntry type="library" name="h2-2.0.201" level="project" />
-    <orderEntry type="library" name="net.sf.ucanaccess:ucanaccess:5.0.1" level="project" />
-    <orderEntry type="library" name="org.apache.derby:derby:10.15.2.0" level="project" />
-    <orderEntry type="library" name="org.apache.lucene:lucene-highlighter:8.8.2" level="project" />
-    <orderEntry type="library" name="org.apache.lucene:lucene-queryparser:8.8.2" level="project" />
-    <orderEntry type="library" name="org.apache.lucene:lucene-analyzers-common:8.8.2" level="project" />
-    <orderEntry type="library" name="org.apache.derby:derbytools:10.15.2.0" level="project" />
-    <orderEntry type="library" name="org.apache.pdfbox:pdfbox:3.0.0-RC1" level="project" />
-    <orderEntry type="library" name="org.apache.pdfbox:xmpbox:3.0.0-RC1" level="project" />
-    <orderEntry type="library" name="com.itextpdf:kernel:7.1.16" level="project" />
-    <orderEntry type="library" name="com.itextpdf:layout:7.1.16" level="project" />
-    <orderEntry type="library" name="org.xerial:sqlite-jdbc:3.36.0.1" level="project" />
   </component>
 </module>

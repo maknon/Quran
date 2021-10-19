@@ -2,7 +2,7 @@ package classes;
 
 /*
  * Quran Encyclopedia
- * Version 1.0
+ * Version 2.1
  */
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +17,6 @@ import java.sql.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.plaf.FontUIResource;
 
-import com.alee.laf.WebLookAndFeel;
 import javafx.scene.media.*;
 import org.apache.lucene.search.*;
 import org.apache.lucene.index.*;
@@ -39,11 +38,12 @@ class Quran extends JFrame
 	boolean selectedByAyaButton, selectedBySuraButton, selectedByPageButton, selectedByHezpButton, selectedByJozButton, selectedByMouse, selectedByTahfeed, selectedBySearch;
 	private boolean cancelAyaListener, cancelSuraListener, cancelPageListener, cancelHezpListener, cancelJozListener;
 	private final DrawingPanel drawingPanel = new DrawingPanel();
+	private final JPanel quranPanel;
+	private final JScrollPane drawingScrollPane;
 	private final JButton play_pauseButton, startTahfeedButton, stopTahfeedButton, jozDecrementButton, jozIncrementButton, hezpDecrementButton, hezpIncrementButton, pageDecrementButton, pageIncrementButton, suraDecrementButton, suraIncrementButton, ayaDecrementButton, stopButton;
 	boolean internetStreaming = true;
 	String audioLocation = "";
 	private final JButton ayaIncrementButton;
-	boolean versionUpdateNotifier = true;
 	private MediaPlayer player;
 	Search searchDialog;
 	static IndexSearcher indexSearcher, arabicRootsTableSearcher, arabicRootsSearcher, arabicLuceneSearcher;
@@ -127,9 +127,6 @@ class Quran extends JFrame
 			internetStreaming = in.readLine().equals("true");
 			audioLocation = in.readLine();
 
-			if (in.readLine().equals("false")) versionUpdateNotifier = false;
-			//else versionUpdateNotifier = true; // by default
-
 			in.close();
 
 			// It should be after reading the file since defaultLanguage will write again to setting.txt
@@ -139,8 +136,10 @@ class Quran extends JFrame
 				language = defaultLanguage.equals("true");
 
 			// uthman.otf does not have English letters. you need to mix it yourself if you want to display both in the same book. But JTextPane is handling this by itself, JTextArea is not.
+			// Version 2.1, replace uthman.otf with ScheherazadeNew.ttf which is much better. TODO: replace back JTextPane with JTextArea since it contains english letters as well. see above
 			if (language)
-				ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("bin/uthman.otf")));
+				//ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("bin/uthman.otf")));
+				ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("bin/ScheherazadeNew.ttf")));
 		}
 		catch (Exception e)
 		{
@@ -265,11 +264,6 @@ class Quran extends JFrame
 			UIManager.put("FileChooser.detailsViewActionLabelText", translation[14]);
 			UIManager.put("FileChooser.directoryOpenButtonText", translation[15]);
 		}
-
-		final JPanel quranPanel = new JPanel(new BorderLayout());
-		getContentPane().add(new JScrollPane(quranPanel));
-		quranPanel.add(drawingPanel, BorderLayout.CENTER);
-		quranPanel.setBackground(Color.white);
 
 		final Vector<String> pages = new Vector<>();
 		for (int i = 1; i < 605; i++) pages.addElement(translation[2] + i);
@@ -400,8 +394,8 @@ class Quran extends JFrame
 			}
 		});
 
-		suraIncrementButton = new JButton(new ImageIcon("images/ayaIncrement.png"));
-		suraDecrementButton = new JButton(new ImageIcon("images/ayaDecrement.png"));
+		suraIncrementButton = new JButton(new ImageIcon(language?"images/ayaIncrement.png":"images/ayaDecrement.png"));
+		suraDecrementButton = new JButton(new ImageIcon(language?"images/ayaDecrement.png":"images/ayaIncrement.png"));
 		suraIncrementButton.setMargin(new Insets(3, 3, 3, 3));
 		suraDecrementButton.setMargin(new Insets(3, 3, 3, 3));
 		final ActionListener suraListener = (e) ->
@@ -433,8 +427,8 @@ class Quran extends JFrame
 			}
 		});
 
-		ayaIncrementButton = new JButton(new ImageIcon("images/ayaIncrement.png"));
-		ayaDecrementButton = new JButton(new ImageIcon("images/ayaDecrement.png"));
+		ayaIncrementButton = new JButton(new ImageIcon(language?"images/ayaIncrement.png":"images/ayaDecrement.png"));
+		ayaDecrementButton = new JButton(new ImageIcon(language?"images/ayaDecrement.png":"images/ayaIncrement.png"));
 		ayaIncrementButton.setMargin(new Insets(3, 3, 3, 3));
 		ayaDecrementButton.setMargin(new Insets(3, 3, 3, 3));
 		final ActionListener ayaListener = (e) ->
@@ -466,8 +460,8 @@ class Quran extends JFrame
 			}
 		});
 
-		pageIncrementButton = new JButton(new ImageIcon("images/ayaIncrement.png"));
-		pageDecrementButton = new JButton(new ImageIcon("images/ayaDecrement.png"));
+		pageIncrementButton = new JButton(new ImageIcon(language?"images/ayaIncrement.png":"images/ayaDecrement.png"));
+		pageDecrementButton = new JButton(new ImageIcon(language?"images/ayaDecrement.png":"images/ayaIncrement.png"));
 		pageIncrementButton.setMargin(new Insets(3, 3, 3, 3));
 		pageDecrementButton.setMargin(new Insets(3, 3, 3, 3));
 		final ActionListener pageListener = (e) ->
@@ -499,8 +493,8 @@ class Quran extends JFrame
 			}
 		});
 
-		jozIncrementButton = new JButton(new ImageIcon("images/ayaIncrement.png"));
-		jozDecrementButton = new JButton(new ImageIcon("images/ayaDecrement.png"));
+		jozIncrementButton = new JButton(new ImageIcon(language?"images/ayaIncrement.png":"images/ayaDecrement.png"));
+		jozDecrementButton = new JButton(new ImageIcon(language?"images/ayaDecrement.png":"images/ayaIncrement.png"));
 		jozIncrementButton.setMargin(new Insets(3, 3, 3, 3));
 		jozDecrementButton.setMargin(new Insets(3, 3, 3, 3));
 		final ActionListener jozListener = (e) ->
@@ -532,8 +526,8 @@ class Quran extends JFrame
 			}
 		});
 
-		hezpIncrementButton = new JButton(new ImageIcon("images/ayaIncrement.png"));
-		hezpDecrementButton = new JButton(new ImageIcon("images/ayaDecrement.png"));
+		hezpIncrementButton = new JButton(new ImageIcon(language?"images/ayaIncrement.png":"images/ayaDecrement.png"));
+		hezpDecrementButton = new JButton(new ImageIcon(language?"images/ayaDecrement.png":"images/ayaIncrement.png"));
 		hezpIncrementButton.setMargin(new Insets(3, 3, 3, 3));
 		hezpDecrementButton.setMargin(new Insets(3, 3, 3, 3));
 		final ActionListener hezpListener = (e) ->
@@ -775,7 +769,7 @@ class Quran extends JFrame
 		getContentPane().add(controlPanel, BorderLayout.SOUTH);
 		*/
 
-		getContentPane().add(new JPanel(new BorderLayout())
+		add(new JPanel(new BorderLayout())
 		{
 			{
 				add(new JPanel()
@@ -785,34 +779,35 @@ class Quran extends JFrame
 						add(new JPanel(new BorderLayout())
 						{
 							{
+								setLayout(new GridBagLayout());
 								setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), translation[24], TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_JUSTIFICATION, null, Color.red));
-								add(new JPanel()
-								{
-									{
-										setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-										add(fromAya);
-										add(fromSura);
-										add(new JLabel(translation[29]));
-									}
-								}, BorderLayout.NORTH);
 
-								add(new JPanel()
-								{
-									{
-										setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-										add(toAya);
-										add(toSura);
-										add(new JLabel(translation[30]));
-									}
-								}, BorderLayout.CENTER);
+								add(new JLabel(translation[29]), new GridBagConstraints(
+										0, 0, 1, 1, 0.2, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+								add(fromSura, new GridBagConstraints(
+										1, 0, 3, 1, 1.0, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+								add(fromAya, new GridBagConstraints(
+										4, 0, 3, 1, 1.0, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 
-								add(new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0))
-								{
-									{
-										add(startTahfeedButton);
-										add(stopTahfeedButton);
-									}
-								}, BorderLayout.SOUTH);
+								add(new JLabel(translation[30]), new GridBagConstraints(
+										0, 1, 1, 1, 0.2, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+								add(toSura, new GridBagConstraints(
+										1, 1, 3, 1, 1.0, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+								add(toAya, new GridBagConstraints(
+										4, 1, 3, 1, 1.0, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+
+								add(startTahfeedButton, new GridBagConstraints(
+										1, 2, 3, 1, 1.0, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(1, 0, 0, 0), 1, 0));
+								add(stopTahfeedButton, new GridBagConstraints(
+										4, 2, 3, 1, 1.0, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(1, 0, 0, 0), 1, 0));
 							}
 						});
 
@@ -875,66 +870,95 @@ class Quran extends JFrame
 						add(new JPanel()
 						{
 							{
-								setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+								setLayout(new GridBagLayout());
 								setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), translation[38], TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_JUSTIFICATION, null, Color.red));
-								add(new JPanel()
-								{
-									{
-										setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-										add(hezpIncrementButton);
-										add(hezpComboBox);
-										add(hezpDecrementButton);
-										add(new JLabel("   "));
-										add(sheekhComboBox);
-									}
-								});
-								add(new JPanel()
-								{
-									{
-										setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-										add(pageIncrementButton);
-										add(pageComboBox);
-										add(pageDecrementButton);
-										add(new JLabel("   "));
-										add(jozIncrementButton);
-										add(jozComboBox);
-										add(jozDecrementButton);
-									}
-								});
-								add(new JPanel()
-								{
-									{
-										setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-										add(suraIncrementButton);
-										add(suraComboBox);
-										add(suraDecrementButton);
-										add(new JLabel("   "));
-										add(ayaIncrementButton);
-										add(ayaComboBox);
-										add(ayaDecrementButton);
-									}
-								});
-								add(new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0))
-								{
-									{
-										if (language)
-										{
-											add(play_pauseButton);
-											add(stopButton);
-										}
-										else
-										{
-											add(stopButton);
-											add(play_pauseButton);
-										}
-									}
-								});
+
+								add(sheekhComboBox, new GridBagConstraints(
+										0, 0, 5, 1, 1.0, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+								add(new JLabel("   "), new GridBagConstraints(
+										5, 0, 1, 1, 0.0, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+								add(jozDecrementButton, new GridBagConstraints(
+										6, 0, 1, 1, 0.0, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+								add(jozComboBox, new GridBagConstraints(
+										7, 0, 3, 1, 1.0, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+								add(jozIncrementButton, new GridBagConstraints(
+										10, 0, 1, 1, 0.0, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+
+								add(hezpDecrementButton, new GridBagConstraints(
+										0, 1, 1, 1, 0.0, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+								add(hezpComboBox, new GridBagConstraints(
+										1, 1, 3, 1, 1.0, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+								add(hezpIncrementButton, new GridBagConstraints(
+										4, 1, 1, 1, 0.0, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+								add(new JLabel("   "), new GridBagConstraints(
+										5, 1, 1, 1, 0.0, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+								add(pageDecrementButton, new GridBagConstraints(
+										6, 1, 1, 1, 0.0, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+								add(pageComboBox, new GridBagConstraints(
+										7, 1, 3, 1, 1.0, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+								add(pageIncrementButton, new GridBagConstraints(
+										10, 1, 1, 1, 0.0, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+
+								add(ayaDecrementButton, new GridBagConstraints(
+										0, 2, 1, 1, 0.0, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+								add(ayaComboBox, new GridBagConstraints(
+										1, 2, 3, 1, 1.0, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+								add(ayaIncrementButton, new GridBagConstraints(
+										4, 2, 1, 1, 0.0, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+								add(new JLabel("   "), new GridBagConstraints(
+										5, 2, 1, 1, 0.0, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+								add(suraDecrementButton, new GridBagConstraints(
+										6, 2, 1, 1, 0.0, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+								add(suraComboBox, new GridBagConstraints(
+										7, 2, 3, 1, 1.0, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+								add(suraIncrementButton, new GridBagConstraints(
+										10, 2, 1, 1, 0.0, 1.0,
+										GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 							}
 						});
+
+						add(new JPanel(new BorderLayout())
+						{
+							{
+								setLayout(new FlowLayout(FlowLayout.CENTER, 0, 3));
+								if(language)
+								{
+									add(play_pauseButton);
+									add(stopButton);
+								}
+								else
+								{
+									add(stopButton);
+									add(play_pauseButton);
+								}
+							}
+						});
+
 					}
 				}, BorderLayout.NORTH);
 			}
-		}, BorderLayout.EAST);
+		}, language?BorderLayout.EAST:BorderLayout.WEST);
+		//}, new GridBagConstraints(
+				//0, 0, 1, 1, 0, 0.0,
+				//GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 
 		new javafx.embed.swing.JFXPanel(); // It implicitly initializes the JavaFX runtime for the player.
 
@@ -968,16 +992,6 @@ class Quran extends JFrame
 							}
 						});
 
-						add(new JMenuItem(translation[20], new ImageIcon("images/online_update.png"))
-						{
-							{
-								addActionListener((e) ->
-								{
-									//new Update(Quran.this);
-								});
-							}
-						});
-
 						addSeparator();
 
 						add(new JMenuItem(translation[21])
@@ -997,9 +1011,10 @@ class Quran extends JFrame
 							{
 								addActionListener((e) ->
 								{
+
 									try
 									{
-										Desktop.getDesktop().browse(new File("UserGuide/quran.htm").toURI());
+										Desktop.getDesktop().browse(new URI("https://www.maknoon.com/community/threads/96/")); // Version 2.1
 									}
 									catch (Exception ex)
 									{
@@ -1040,14 +1055,24 @@ class Quran extends JFrame
 			setExtendedState(MAXIMIZED_BOTH);
 
 		if (language)
-		{
-			WebLookAndFeel.setLeftToRightOrientation(false);
-
 			getContentPane().applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 
-			// When resizing, the above affecting the direction to be Right to left. Maybe the above overwrites the orientation of the quranPanel
-			quranPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-		}
+		// Version 2.1, moved here since drawingPanel is not centered unless it is after applying RIGHT_TO_LEFT
+		//setLayout(new GridBagLayout());
+
+		quranPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		quranPanel.add(drawingPanel);
+		drawingScrollPane = new JScrollPane(quranPanel);
+		quranPanel.setBackground(Color.white);
+
+		//jsc.setLayout(new FlowLayout(FlowLayout.CENTER));
+		//jsc.setPreferredSize(new Dimension(drawingPanel.imageWidth, drawingPanel.imageHeight));
+		//jsc.getViewport().setBackground(Color.black);
+
+		add(drawingScrollPane, BorderLayout.CENTER);
+		//add(drawingScrollPane, new GridBagConstraints(
+				//1, 0, 1, 1, 1.0, 1.0,
+				//GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 
 		setVisible(true);
 
@@ -1085,65 +1110,6 @@ class Quran extends JFrame
 				e.printStackTrace();
 			}
 		}
-
-		// Check for a new version
-		if (versionUpdateNotifier)
-		{
-			final Thread thread = new Thread()
-			{
-				public void run()
-				{
-					try
-					{
-						final float currentVersion = Float.parseFloat(StreamConverter("setting/version.txt")[0]);
-						final URL link = new URL("http://www.maknoon.com/download/programs/QuranVersion.txt");
-						final BufferedReader in = new BufferedReader(new InputStreamReader(link.openStream()));
-						final float nextVersion = Float.parseFloat(in.readLine());
-						in.close();
-
-						if (nextVersion > currentVersion)
-						{
-							final Image image = Toolkit.getDefaultToolkit().getImage("images/icon.png");
-							if (SystemTray.isSupported())
-							{
-								final TrayIcon trayIcon = new TrayIcon(image, translation[0] + nextVersion);
-								final SystemTray tray = SystemTray.getSystemTray();
-								trayIcon.setImageAutoSize(true);
-								trayIcon.addActionListener((e) ->
-								{
-									try
-									{
-										Desktop.getDesktop().browse(new URI("https://www.maknoon.com/community/threads/%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC-%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85.96/"));
-									}
-									catch (Exception ex)
-									{
-										ex.printStackTrace();
-									}
-									tray.remove(trayIcon);
-								});
-
-								trayIcon.addMouseListener(new MouseAdapter()
-								{
-									public void mouseClicked(MouseEvent e)
-									{
-										if (e.getClickCount() == 1)
-											trayIcon.displayMessage(translation[18], translation[0] + nextVersion, TrayIcon.MessageType.INFO);
-									}
-								});
-
-								tray.add(trayIcon);
-								trayIcon.displayMessage(translation[18], translation[0] + nextVersion, TrayIcon.MessageType.INFO);
-							}
-						}
-					}
-					catch (Exception e)
-					{
-						e.printStackTrace();
-					}
-				}
-			};
-			thread.start();
-		}
 	}
 
 	void shutdown()
@@ -1165,14 +1131,17 @@ class Quran extends JFrame
 
 	public class DrawingPanel extends JPanel
 	{
-		Graphics imageGraphics;
-		BufferedImage baseImage, displayImage, filterImage, rolloverImage;
-		int imageWidth, imageHeight;
-		int[] imageData, rolloverData;
+		static Graphics imageGraphics;
+		static BufferedImage baseImage, displayImage, filterImage, rolloverImage;
+		static int imageWidth, imageHeight;
+		static int[] imageData, rolloverData;
 
 		public DrawingPanel()
 		{
+			//super();
+
 			setLayout(null);
+			//setLayout(new FlowLayout(FlowLayout.CENTER));
 
 			/*
 			//try
@@ -1234,7 +1203,14 @@ class Quran extends JFrame
 
 	            setPreferredSize(new Dimension(imageWidth, imageHeight));
 
-				//SwingUtilities.updateComponentTreeUI(this); // Check if we need this after finishing assigning the x-y
+				SwingUtilities.updateComponentTreeUI(this); // we need this after finishing assigning the x-y (some LaF does not need it e.g. WebLaF)
+				//revalidate();
+				//repaint();
+
+				quranPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+				drawingScrollPane.updateUI();
+				//Quran.this.getContentPane().revalidate();
+				//Quran.this.getContentPane().repaint();
 
 				baseImage.createGraphics().drawImage(image, 0, 0, Color.WHITE /*getBackground()*/, null);
 				imageGraphics.drawImage(baseImage, 0, 0, null);
@@ -1350,26 +1326,27 @@ class Quran extends JFrame
                                                             final Reader description = rs.getCharacterStream(i);
                                                             */
 
-													final JMenu tafseerMenuItem = new JMenu(language ? "التفسير" : "Translation");
-													final Reader description = rs.getCharacterStream(1);
+															final JMenu tafseerMenuItem = new JMenu(language ? "التفسير" : "Translation");
+															final Reader description = rs.getCharacterStream(1);
 
-													final char[] arr = new char[4 * 1024]; // 4K at a time
-													final StringBuilder buf = new StringBuilder();
-													int numChars;
+															final char[] arr = new char[4 * 1024]; // 4K at a time
+															final StringBuilder buf = new StringBuilder();
+															int numChars;
 
-													while ((numChars = description.read(arr, 0, arr.length)) > 0)
-														buf.append(arr, 0, numChars);
+															while ((numChars = description.read(arr, 0, arr.length)) > 0)
+																buf.append(arr, 0, numChars);
 
-													final JTextArea tafseerTextArea = new JTextArea(buf.toString());
-													tafseerTextArea.setLineWrap(true);
-													tafseerTextArea.setWrapStyleWord(true);
-													tafseerTextArea.setEnabled(false);
-													tafseerTextArea.setFont(new Font("KFGQPC Uthman Taha Naskh", Font.PLAIN, 24));
-													final JScrollPane sp = new JScrollPane(tafseerTextArea);
-													sp.setPreferredSize(new Dimension(800, 400));
-													tafseerMenuItem.add(sp);
-													tafseerPopupMenu.add(tafseerMenuItem);
-													//    }
+															final JTextArea tafseerTextArea = new JTextArea(buf.toString());
+															tafseerTextArea.setLineWrap(true);
+															tafseerTextArea.setWrapStyleWord(true);
+															tafseerTextArea.setEnabled(false);
+															//tafseerTextArea.setFont(new Font("KFGQPC Uthman Taha Naskh", Font.PLAIN, 24));
+															tafseerTextArea.setFont(new Font("Scheherazade New", Font.PLAIN, 24)); // Version 2.1
+															final JScrollPane sp = new JScrollPane(tafseerTextArea);
+															sp.setPreferredSize(new Dimension(800, 400));
+															tafseerMenuItem.add(sp);
+															tafseerPopupMenu.add(tafseerMenuItem);
+													    //}
 													//}
 												}
 
@@ -1394,7 +1371,9 @@ class Quran extends JFrame
 														eerabTextArea.setLineWrap(true);
 														eerabTextArea.setWrapStyleWord(true);
 														eerabTextArea.setEnabled(false);
-														eerabTextArea.setFont(new Font("KFGQPC Uthman Taha Naskh", Font.PLAIN, 24));
+														//eerabTextArea.setFont(new Font("KFGQPC Uthman Taha Naskh", Font.PLAIN, 24));
+														eerabTextArea.setFont(new Font("Scheherazade New", Font.PLAIN, 24)); // Version 2.1
+
 														final JScrollPane sp = new JScrollPane(eerabTextArea);
 														sp.setPreferredSize(new Dimension(600, 300));
 														eerabMenuItem.add(sp);
@@ -1478,111 +1457,111 @@ class Quran extends JFrame
 			//{
 			//	public void run()
 			//	{
-			final Media media;
-			if (internetStreaming)
-				media = new Media("https://www.everyayah.com/data/" + sheekhFolders.elementAt(sheekhComboBox.getSelectedIndex()) + '/' + file);
-			else
-				media = new Media(new File(audioLocation + '/' + sheekhFolders.elementAt(sheekhComboBox.getSelectedIndex()) + '/' + file).toURI().toString());
+					final Media media;
+					if (internetStreaming)
+						media = new Media("https://www.everyayah.com/data/" + sheekhFolders.elementAt(sheekhComboBox.getSelectedIndex()) + '/' + file);
+					else
+						media = new Media(new File(audioLocation + '/' + sheekhFolders.elementAt(sheekhComboBox.getSelectedIndex()) + '/' + file).toURI().toString());
 
-			if (player != null) player.stop(); // To stop the old one
-			player = null; // Even with this, the player instance is still running even if we re-assign it or stop/null. it seems it is natively threaded.
-			player = new MediaPlayer(media);
-			player.setOnEndOfMedia(() ->
-			{
-				// SwingUtilities.invokeLater solves the issue for rendering since it is inside a thread
-				if (!startTahfeedButton.isEnabled() && ayaComboBox.getSelectedIndex() == toAya.getSelectedIndex() && suraComboBox.getSelectedIndex() == toSura.getSelectedIndex())
-				{
-					//startTahfeedButton.doClick();
-					selectedBySuraButton = false;
-					selectedByPageButton = false;
-					selectedByAyaButton = false;
-					selectedByHezpButton = false;
-					selectedByJozButton = false;
-					selectedByMouse = false;
-					selectedBySearch = false;
-					selectedByTahfeed = true;
-					SwingUtilities.invokeLater(() -> SelectionThread(-1));
-				}
-				else
-				{
-					final int ayaIndex = ayaComboBox.getSelectedIndex() + 1;
-					if (ayaIndex >= ayaComboBox.getItemCount())
+					if (player != null) player.stop(); // To stop the old one
+					player = null; // Even with this, the player instance is still running even if we re-assign it or stop/null. it seems it is natively threaded.
+					player = new MediaPlayer(media);
+					player.setOnEndOfMedia(() ->
 					{
-						final int suraIndex = suraComboBox.getSelectedIndex() + 1;
-						if (suraIndex > 113)
-							player.stop();
+						// SwingUtilities.invokeLater solves the issue for rendering since it is inside a thread
+						if (!startTahfeedButton.isEnabled() && ayaComboBox.getSelectedIndex() == toAya.getSelectedIndex() && suraComboBox.getSelectedIndex() == toSura.getSelectedIndex())
+						{
+							//startTahfeedButton.doClick();
+							selectedBySuraButton = false;
+							selectedByPageButton = false;
+							selectedByAyaButton = false;
+							selectedByHezpButton = false;
+							selectedByJozButton = false;
+							selectedByMouse = false;
+							selectedBySearch = false;
+							selectedByTahfeed = true;
+							SwingUtilities.invokeLater(() -> SelectionThread(-1));
+						}
 						else
 						{
-							// Basmalah except for Twpah (Baraa'ah)
-							if (suraIndex != 8 && aya != 0) // '&& suraIndex!=0' not important since it will not reach 0. '&& aya!=0' to not repeat basmalah in a loop.
-								playAya(0, suraIndex); // special case to run basmalah without changing anything else
+							final int ayaIndex = ayaComboBox.getSelectedIndex() + 1;
+							if (ayaIndex >= ayaComboBox.getItemCount())
+							{
+								final int suraIndex = suraComboBox.getSelectedIndex() + 1;
+								if (suraIndex > 113)
+									player.stop();
+								else
+								{
+									// Basmalah except for Twpah (Baraa'ah)
+									if (suraIndex != 8 && aya != 0) // '&& suraIndex!=0' not important since it will not reach 0. '&& aya!=0' to not repeat basmalah in a loop.
+										playAya(0, suraIndex); // special case to run basmalah without changing anything else
+									else
+										SwingUtilities.invokeLater(() -> suraComboBox.setSelectedIndex(suraIndex));
+								}
+							}
 							else
-								SwingUtilities.invokeLater(() -> suraComboBox.setSelectedIndex(suraIndex));
+								SwingUtilities.invokeLater(() -> ayaComboBox.setSelectedIndex(ayaIndex));
 						}
-					}
-					else
-						SwingUtilities.invokeLater(() -> ayaComboBox.setSelectedIndex(ayaIndex));
-				}
-			});
+					});
 
-			player.setOnPlaying(() ->
-			{
-				play_pauseButton.setIcon(new ImageIcon("images/pause.png"));
-				play_pauseButton.setRolloverIcon(new ImageIcon("images/pause_rollover.png"));
-				play_pauseButton.setPressedIcon(new ImageIcon("images/pause_pressed.png"));
+					player.setOnPlaying(() ->
+					{
+						play_pauseButton.setIcon(new ImageIcon("images/pause.png"));
+						play_pauseButton.setRolloverIcon(new ImageIcon("images/pause_rollover.png"));
+						play_pauseButton.setPressedIcon(new ImageIcon("images/pause_pressed.png"));
 
-			});
+					});
 
-			player.setOnPaused(() ->
-			{
-				play_pauseButton.setIcon(new ImageIcon("images/play.png"));
-				play_pauseButton.setRolloverIcon(new ImageIcon("images/play_rollover.png"));
-				play_pauseButton.setPressedIcon(new ImageIcon("images/play_pressed.png"));
-			});
+					player.setOnPaused(() ->
+					{
+						play_pauseButton.setIcon(new ImageIcon("images/play.png"));
+						play_pauseButton.setRolloverIcon(new ImageIcon("images/play_rollover.png"));
+						play_pauseButton.setPressedIcon(new ImageIcon("images/play_pressed.png"));
+					});
 
-			player.setOnStalled(() ->
-			{
-				play_pauseButton.setIcon(new ImageIcon("images/pause_stalled.png"));
-				play_pauseButton.setRolloverIcon(new ImageIcon("images/pause_rollover_stalled.png"));
-				play_pauseButton.setPressedIcon(new ImageIcon("images/pause_pressed_stalled.png"));
-			});
+					player.setOnStalled(() ->
+					{
+						play_pauseButton.setIcon(new ImageIcon("images/pause_stalled.png"));
+						play_pauseButton.setRolloverIcon(new ImageIcon("images/pause_rollover_stalled.png"));
+						play_pauseButton.setPressedIcon(new ImageIcon("images/pause_pressed_stalled.png"));
+					});
 
-			player.setOnReady(() ->
-			{
-				play_pauseButton.setIcon(new ImageIcon("images/play.png"));
-				play_pauseButton.setRolloverIcon(new ImageIcon("images/play_rollover.png"));
-				play_pauseButton.setPressedIcon(new ImageIcon("images/play_pressed.png"));
-			});
+					player.setOnReady(() ->
+					{
+						play_pauseButton.setIcon(new ImageIcon("images/play.png"));
+						play_pauseButton.setRolloverIcon(new ImageIcon("images/play_rollover.png"));
+						play_pauseButton.setPressedIcon(new ImageIcon("images/play_pressed.png"));
+					});
 
-			player.setOnHalted(() ->
-			{
-				play_pauseButton.setIcon(new ImageIcon("images/play.png"));
-				play_pauseButton.setRolloverIcon(new ImageIcon("images/play_rollover.png"));
-				play_pauseButton.setPressedIcon(new ImageIcon("images/play_pressed.png"));
-			});
+					player.setOnHalted(() ->
+					{
+						play_pauseButton.setIcon(new ImageIcon("images/play.png"));
+						play_pauseButton.setRolloverIcon(new ImageIcon("images/play_rollover.png"));
+						play_pauseButton.setPressedIcon(new ImageIcon("images/play_pressed.png"));
+					});
 
-			player.setOnStopped(() ->
-			{
-				play_pauseButton.setIcon(new ImageIcon("images/play.png"));
-				play_pauseButton.setRolloverIcon(new ImageIcon("images/play_rollover.png"));
-				play_pauseButton.setPressedIcon(new ImageIcon("images/play_pressed.png"));
-			});
+					player.setOnStopped(() ->
+					{
+						play_pauseButton.setIcon(new ImageIcon("images/play.png"));
+						play_pauseButton.setRolloverIcon(new ImageIcon("images/play_rollover.png"));
+						play_pauseButton.setPressedIcon(new ImageIcon("images/play_pressed.png"));
+					});
 
-			player.setOnError(() ->
-			{
-				// we cannot get the error message even with MediaException !
-				final String[] translation = StreamConverter("language/" + ((language) ? "DrawingPanelArabic.txt" : "DrawingPanelEnglish.txt"));
-				if (internetStreaming)
-					JOptionPane.showOptionDialog(getContentPane(), translation[0], translation[1], JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{translation[2]}, translation[2]);
-				else
-					JOptionPane.showOptionDialog(getContentPane(), translation[3], translation[1], JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{translation[2]}, translation[2]);
+					player.setOnError(() ->
+					{
+						// we cannot get the error message even with MediaException !
+						final String[] translation = StreamConverter("language/" + ((language) ? "DrawingPanelArabic.txt" : "DrawingPanelEnglish.txt"));
+						if (internetStreaming)
+							JOptionPane.showOptionDialog(getContentPane(), translation[0], translation[1], JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{translation[2]}, translation[2]);
+						else
+							JOptionPane.showOptionDialog(getContentPane(), translation[3], translation[1], JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, new String[]{translation[2]}, translation[2]);
 
-				play_pauseButton.setIcon(new ImageIcon("images/play.png"));
-				play_pauseButton.setRolloverIcon(new ImageIcon("images/play_rollover.png"));
-				play_pauseButton.setPressedIcon(new ImageIcon("images/play_pressed.png"));
-			});
+						play_pauseButton.setIcon(new ImageIcon("images/play.png"));
+						play_pauseButton.setRolloverIcon(new ImageIcon("images/play_rollover.png"));
+						play_pauseButton.setPressedIcon(new ImageIcon("images/play_pressed.png"));
+					});
 
-			player.play();
+					player.play();
 			//	}
 			//};
 			//thread.start();
@@ -2219,7 +2198,12 @@ class Quran extends JFrame
 			e.printStackTrace();
 		}
 
-		WebLookAndFeel.install();
+		com.formdev.flatlaf.FlatLightLaf.setup();
+		UIManager.put("TitlePane.menuBarEmbedded", false);
+		UIManager.put("Button.arc", 0);
+		UIManager.put("MenuItem.selectionType", "underline");
+		UIManager.put("OptionPane.maxCharactersPerLine", 0);
+
 		SwingUtilities.invokeLater(Quran::new);
 	}
 }

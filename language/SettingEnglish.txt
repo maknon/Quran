@@ -13,5 +13,3 @@ Open
 Local
 Internet
 Continue
-New versions
-Search for new versions at statup

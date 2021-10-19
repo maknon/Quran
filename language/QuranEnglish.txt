@@ -18,7 +18,7 @@ Part
 Hezp 
 New version
 File
-Updates List
+----------
 Exit
 Selection
 Start

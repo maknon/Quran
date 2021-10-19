@@ -64,7 +64,7 @@ $\r$\n\
 This product is licensed to all Muslims$\r$\n\
 Copyright©2021 Maknoon.com$\r$\n\
 This product is not for sale$\r$\n\
-Version 2.0"
+Version 2.1"
 LangString WELCOME_TEXT ${LANG_ARABIC} "السلام عليكم ورحمة الله وبركاته$\r$\n\
 $\r$\n\
 يساعدك برنامج القرآن الكريم لتلاوة القرآن والاستماع إليه، كما يتضمن التفسير والتحفيظ وغيره.$\r$\n\
@@ -72,7 +72,7 @@ $\r$\n\
 البرنامج مصرح لنشره واستخدامه من جميع المسلمين$\r$\n\
 جميع الحقوق محفوظة لموقع مكنون$\r$\n\
 يمنع بيع البرنامج$\r$\n\
-الإصدار 2.0"
+الإصدار 2.1"
 
 LangString WELCOME_TITLE ${LANG_ENGLISH} "${PROGRAM_NAME}"
 LangString WELCOME_TITLE ${LANG_ARABIC} "${PROGRAM_NAME_AR}"
@@ -140,12 +140,12 @@ FunctionEnd
 ; The name of the installer
 Name "$(INSTALLER_NAME)"
 BrandingText "$(INSTALLER_NAME)"
-VIProductVersion "2.0.0.0"
+VIProductVersion "2.1.0.0"
 VIAddVersionKey "ProductName" "${PROGRAM_NAME_AR}"
 VIAddVersionKey "CompanyName" "${MAKNOON_APPS}"
 VIAddVersionKey "LegalCopyright" "©maknoon.com"
 VIAddVersionKey "FileDescription" "${PROGRAM_NAME_AR}"
-VIAddVersionKey "FileVersion" "2.0"
+VIAddVersionKey "FileVersion" "2.1"
 VIAddVersionKey "InternalName" "${PROGRAM_NAME}"
 
 ; The stuff to install
@@ -218,7 +218,7 @@ Section "${PROGRAM_NAME}" SEC_IDX
 	WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${PROGRAM_NAME}" "DisplayName" "$(INSTALLER_NAME)"
 	WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${PROGRAM_NAME}" "URLInfoAbout" "https://www.maknoon.com"
 	WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${PROGRAM_NAME}" "DisplayIcon" "$INSTDIR\Quran.exe,0"
-	WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${PROGRAM_NAME}" "DisplayVersion" "2.0"
+	WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${PROGRAM_NAME}" "DisplayVersion" "2.1"
 	WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${PROGRAM_NAME}" "Publisher" "$(PUBLISHER_NAME)"
 	WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${PROGRAM_NAME}" "UninstallString" '"$INSTDIR\uninstall.exe"'
 	WriteRegDWORD HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${PROGRAM_NAME}" "NoModify" 1

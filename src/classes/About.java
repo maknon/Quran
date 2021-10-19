@@ -16,7 +16,7 @@ class About extends JWindow
         final char [] version = splashString.toCharArray();
         shaper.shape(version, 0, 3);
 
-        final JLabel splash = new JLabel(new ImageIcon(this.getClass().getClassLoader().getResource("images_X/quran.png")))
+        final JLabel splash = new JLabel(new ImageIcon(this.getClass().getClassLoader().getResource("images/quran.png")))
 		{
 			// paint() is heavier
 			public void paintComponent(Graphics g)

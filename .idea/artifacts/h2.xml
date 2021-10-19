@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="h2">
+    <output-path>$PROJECT_DIR$/lib</output-path>
+    <root id="root">
+      <element id="library" level="project" name="h2-2.0.201" />
+    </root>
+  </artifact>
+</component>

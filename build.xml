@@ -3,13 +3,12 @@
 
 	<property name="build.dir"				value="build"/>
 	<property name="app.name"				value="القرآن العظيم"/>
-	<property name="tools.dir"				value="E:\Others\MIE Support programs"/>
+	<property name="tools.dir"				value="E:\Support"/>
 	<property name="makensis.exe"			value="${tools.dir}\nsis\makensis.exe"/>
 	<property name="launch4j.jar"			value="${tools.dir}\launch4j\launch4j.jar"/>
-	<property name="jdk.linux"				value="openjdk-15_linux-x64_bin.tar.gz"/>
-	<property name="jdk.mac"				value="openjdk-15_osx-x64_bin.tar.gz"/>
-	<property name="jdk.win"				value="openjdk-15_windows-x64_bin.zip"/>
-	<property name="java.old"				value="C:\Users\Ebrahim\Desktop\zulu8.46.0.19-ca-jdk8.0.252-win_x64\bin\java"/>
+	<property name="jdk.linux"				value="openjdk-17_linux-x64_bin.tar.gz"/>
+	<property name="jdk.mac"				value="openjdk-17_macos-x64_bin.tar.gz"/>
+	<property name="jdk.win"				value="openjdk-17_windows-x64_bin.zip"/>
 
 	<path id="class.path">
 		<fileset dir="${build.dir}" includes="lib/*"/>
@@ -24,7 +23,7 @@
 			<fileset dir="." includes="setting/**,db/**,arabicIndex/**,src/**,
 			arabicLuceneIndex/**,pages-hafs/**,bin/**,images/**,images_X/**,
 			language/**,lib/**,arabicRootsIndex/**,arabicRootsTableIndex/**,
-			setup.nsi,quran.xml,startup.bat,launcher.xml,launcher.bat">
+			setup.nsi,quran.xml,startup.bat">
 			</fileset>
 		</copy>
 	</target>
@@ -40,7 +39,21 @@
 			   srcdir="${build.dir}/src"
 			   destdir="${build.dir}"
 			   encoding="UTF-8"
-			   classpathref="class.path"/>
+			   classpathref="class.path">
+			<exclude name="classes/CreatePDF_iText_Hezp.java"/>
+			<exclude name="classes/CreatePDF_iText_Pdf.java"/>
+			<exclude name="classes/CreatePDF_iText_Png.java"/>
+			<exclude name="classes/CreatePDF_iText_Png_Juz.java"/>
+			<exclude name="classes/CreatePDF_iText_Png_Sura.java"/>
+			<exclude name="classes/CreatePDF_PdfBox_Pdf.java"/>
+			<exclude name="classes/CreatePDF_PdfBox_Png.java"/>
+			<exclude name="classes/CreateIndices.java"/>
+			<exclude name="classes/CreateQuranDatabase.java"/>
+			<exclude name="classes/Html2Text.java"/>
+			<exclude name="classes/Test.java"/>
+			<exclude name="classes/UnicodeConvertor.java"/>
+			<exclude name="classes/Tafseer.java"/>
+		</javac>
 	</target>
 
 	<path id="build-classpath">
@@ -66,12 +79,6 @@
 				<attribute name="SplashScreen-Image" value="images/quran.png"/>
 			</manifest>
 		</jar>
-		<jar destfile="${build.dir}/launcher.jar">
-			<manifest>
-				<attribute name="Main-Class" value="classes.Launcher"/>
-				<attribute name="Class-Path" value=". ${manifest.classpath}"/>
-			</manifest>
-		</jar>
 	</target>
 
 	<target name="jdk_win">
@@ -89,14 +96,10 @@
 	</target>
 
 	<target name="launch4j">
-		<exec dir="${build.dir}" executable="cmd" failonerror="true" >
-			<arg value="/c"/>
-			<arg value='"${java.old}" -Dfile.encoding=windows-1252 -jar "${launch4j.jar}" quran.xml'/>
-		</exec>
-		<exec dir="${build.dir}" executable="cmd" failonerror="true" >
-			<arg value="/c"/>
-			<arg value='"${java.old}" -Dfile.encoding=windows-1252 -jar "${launch4j.jar}" launcher.xml'/>
-		</exec>
+		<java dir="${build.dir}" jar="${launch4j.jar}" fork="true">
+			<jvmarg value="-Dfile.encoding=windows-1252"/>
+			<arg value="quran.xml"/>
+		</java>
 	</target>
 
 	<target name="nsis">
@@ -113,10 +116,6 @@
 				<exclude name="images_X/**"/>
 				<exclude name="quran.xml"/>
 				<exclude name="setup.nsi"/>
-				<exclude name="launcher.xml"/>
-				<exclude name="launcher.jar"/>
-				<exclude name="Launcher.exe"/>
-				<exclude name="launcher.bat"/>
 			</tarfileset>
 		</tar>
 	</target>
