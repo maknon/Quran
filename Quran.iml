@@ -25,14 +25,13 @@
     <orderEntry type="library" name="org.apache.derby:derby" level="project" />
     <orderEntry type="library" name="org.apache.lucene:lucene-highlighter" level="project" />
     <orderEntry type="library" name="org.apache.lucene:lucene-queryparser" level="project" />
-    <orderEntry type="library" name="org.apache.lucene:lucene-analyzers-common" level="project" />
     <orderEntry type="library" name="org.apache.derby:derbytools" level="project" />
     <orderEntry type="library" name="org.apache.pdfbox:pdfbox" level="project" />
     <orderEntry type="library" name="org.apache.pdfbox:xmpbox" level="project" />
-    <orderEntry type="library" name="com.itextpdf:kernel" level="project" />
     <orderEntry type="library" name="com.itextpdf:layout" level="project" />
     <orderEntry type="library" name="org.xerial:sqlite-jdbc" level="project" />
     <orderEntry type="library" name="formdev.flatlaf" level="project" />
-    <orderEntry type="library" name="h2-2.0.201" level="project" />
+    <orderEntry type="library" name="com.h2database:h2" level="project" />
+    <orderEntry type="library" name="org.apache.lucene:lucene-analysis-common" level="project" />
   </component>
 </module>

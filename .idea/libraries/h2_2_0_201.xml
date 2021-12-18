@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="h2-2.0.201">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../ArabicIndexer/bin_X/h2-2.0.201.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
