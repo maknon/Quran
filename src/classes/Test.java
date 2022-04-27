@@ -12,7 +12,6 @@ public class Test extends JFrame
         JPanel quranPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         quranPanel.add(new JTextField("Test layout in RTL"));
 
-
         setBounds(0, 0, screenSize.width, screenSize.height - 40);
         setExtendedState(MAXIMIZED_BOTH);
 

@@ -51,6 +51,7 @@
 			<exclude name="classes/CreateQuranDatabase.java"/>
 			<exclude name="classes/Html2Text.java"/>
 			<exclude name="classes/Test.java"/>
+			<exclude name="classes/CopyAiFiles.java"/>
 			<exclude name="classes/UnicodeConvertor.java"/>
 			<exclude name="classes/Tafseer.java"/>
 		</javac>

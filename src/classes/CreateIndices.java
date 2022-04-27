@@ -9,7 +9,7 @@ import org.apache.lucene.index.IndexWriterConfig.*;
 import java.io.File;
 import java.sql.*;
 
-class CreateIndices
+public final class CreateIndices
 {
 	public static void main(String[] args)
 	{

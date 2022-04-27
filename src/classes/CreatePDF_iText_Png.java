@@ -18,20 +18,38 @@ import static com.itextpdf.kernel.pdf.PdfViewerPreferences.PdfViewerPreferencesC
 
 public class CreatePDF_iText_Png
 {
-	final static boolean hafs = true;
-
-	String p = "F:/Quran/";
-	String src_hafs = p + "hafs-mobile-png/";
-	String src_warsh = p + "warsh-mobile-png/";
+	String p = "D:/Quran/";
 	String v = "1.2";
 
 	CreatePDF_iText_Png() throws Exception
 	{
-		final String title = hafs ? "القرآن الكريم برواية حفص" : "القرآن الكريم برواية ورش";
-		final String creator = "إعداد موقع مكنون";
-		final String subject = "Holy Quran in " + (hafs ? "Hafs" : "Warsh");
+		final int q = 4; // 0->hafs, 1->warsh, 2->qalon, 3->shubah, 4->douri
+		final Vector<String> qeraat = new Vector<>();
+		qeraat.add("hafs");
+		qeraat.add("warsh");
+		qeraat.add("qalon");
+		qeraat.add("shubah");
+		qeraat.add("douri");
 
-		final PdfDocument pdfDocument = new PdfDocument(new PdfWriter(p + (hafs ? "quran_hafs" : "quran_warsh") + "_s.pdf"
+		final Vector<String> qeraat_ar = new Vector<>();
+		qeraat_ar.add("حفص");
+		qeraat_ar.add("ورش");
+		qeraat_ar.add("قالون");
+		qeraat_ar.add("شعبة");
+		qeraat_ar.add("الدوري");
+
+		final Vector<String> pref = new Vector<>();
+		pref.add("Hafs39");
+		pref.add("Warsh39");
+		pref.add("qaloun");
+		pref.add("shuba");
+		pref.add("douri");
+
+		final String title = "القرآن الكريم برواية " + qeraat_ar.get(q);
+		final String creator = "إعداد موقع مكنون";
+		final String subject = "Holy Quran in " + qeraat.get(q);
+
+		final PdfDocument pdfDocument = new PdfDocument(new PdfWriter(p + "quran_" + qeraat.get(q) + "_s.pdf"
 				, new WriterProperties()
 				.addXmpMetadata()
 				.setFullCompressionMode(true) // reduce 0.5%
@@ -55,7 +73,7 @@ public class CreatePDF_iText_Png
 		//info.setMoreInfo(new String("النسخة".getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1), v);
 		info.setMoreInfo(new String("المصدر".getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1), "https://www.maknoon.com/community/threads/164");
 
-		info.setCreator("©2021 maknoon.com");
+		info.setCreator("©2022 maknoon.com");
 
 		final Document document = new Document(pdfDocument);
 		document.setMargins(0,0,0,0);
@@ -65,11 +83,9 @@ public class CreatePDF_iText_Png
 		for (int i = 1; i <= 604; i++)
 		{
 			final String f = formatter.format(i);
-			final ImageData imageData = ImageDataFactory.create((hafs ?
-					src_hafs + f + "___Hafs39__DM.png" :
-					src_warsh + f + "___Warsh39__DM.png"));
+			final ImageData imageData = ImageDataFactory.create(p + qeraat.get(q) + "-mobile-png/" + f + "___" + pref.get(q) + "__DM.png");
 
-			pdfDocument.setDefaultPageSize(new PageSize(new Rectangle(imageData.getWidth(),imageData.getHeight())) );
+			pdfDocument.setDefaultPageSize(new PageSize(new Rectangle(imageData.getWidth(), imageData.getHeight())));
 
 			imageHeight.add(imageData.getHeight());
 

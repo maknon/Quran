@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="org.apache.lucene:lucene-highlighter" type="repository">
-    <properties maven-id="org.apache.lucene:lucene-highlighter:9.0.0" />
+    <properties maven-id="org.apache.lucene:lucene-highlighter:9.1.0" />
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/lucene-highlighter-9.0.0.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/lucene-core-9.0.0.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/lucene-queries-9.0.0.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/lucene-memory-9.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lucene-highlighter-9.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lucene-core-9.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lucene-queries-9.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lucene-memory-9.1.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

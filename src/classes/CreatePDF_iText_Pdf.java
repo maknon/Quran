@@ -7,26 +7,47 @@ import com.itextpdf.kernel.utils.PdfMerger;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
+import java.util.Vector;
 
 import static classes.CreatePDF_QuranDb.*;
-import static classes.CreatePDF_QuranDb.hezp_page;
 import static com.itextpdf.kernel.pdf.PdfViewerPreferences.PdfViewerPreferencesConstants.RIGHT_TO_LEFT;
 
 public class CreatePDF_iText_Pdf
 {
 	final static boolean mobile = true;
-	final static boolean hafs = true;
 
-	String p = "F:/Quran/";
+	String p = "D:/Quran/";
 	String v = "1.2";
 
 	CreatePDF_iText_Pdf() throws IOException
 	{
-		final String title = hafs ? "القرآن الكريم برواية حفص" : "القرآن الكريم برواية ورش";
-		final String creator = "إعداد موقع مكنون";
-		final String subject = "Holy Quran in " + (hafs ? "Hafs" : "Warsh");
+		final int q = 4; // 0->hafs, 1->warsh, 2->qalon, 3->shubah, 4->douri
+		final Vector<String> qeraat = new Vector<>();
+		qeraat.add("hafs");
+		qeraat.add("warsh");
+		qeraat.add("qalon");
+		qeraat.add("shubah");
+		qeraat.add("douri");
 
-		final PdfDocument pdfDocument = new PdfDocument(new PdfWriter(p + (hafs ? "quran_hafs" : "quran_warsh") + (mobile ? "_m" : "_pc") + ".pdf"
+		final Vector<String> qeraat_ar = new Vector<>();
+		qeraat_ar.add("حفص");
+		qeraat_ar.add("ورش");
+		qeraat_ar.add("قالون");
+		qeraat_ar.add("شعبة");
+		qeraat_ar.add("الدوري");
+
+		final Vector<String> pref = new Vector<>();
+		pref.add("Hafs39");
+		pref.add("Warsh39");
+		pref.add("qaloun");
+		pref.add("shuba");
+		pref.add("douri");
+
+		final String title = "القرآن الكريم برواية " + qeraat_ar.get(q);
+		final String creator = "إعداد موقع مكنون";
+		final String subject = "Holy Quran in " + qeraat.get(q);
+
+		final PdfDocument pdfDocument = new PdfDocument(new PdfWriter(p + "quran_" + qeraat.get(q) + (mobile ? "_m" : "_pc") + ".pdf"
 				, new WriterProperties()
 				.addXmpMetadata()
 				.setFullCompressionMode(true) // reduce 0.5%
@@ -53,7 +74,7 @@ public class CreatePDF_iText_Pdf
 		//info.setMoreInfo(new String("النسخة".getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1), v);
 		info.setMoreInfo(new String("المصدر".getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1), "https://www.maknoon.com/community/threads/164");
 
-		info.setCreator("©2021 maknoon.com");
+		info.setCreator("©2022 maknoon.com");
 
 		final PdfMerger merger = new PdfMerger(pdfDocument, false, false);
 
@@ -63,10 +84,8 @@ public class CreatePDF_iText_Pdf
 			final String f = formatter.format(i);
 
 			final PdfDocument doc = new PdfDocument(new PdfReader(mobile ?
-					(hafs ? (p + "hafs-mobile-pdf/" + f + "___Hafs39__DM.pdf") :
-							(p + "warsh-mobile-pdf/" + f + "___Warsh39__DM.pdf")) :
-					(hafs ? (p + "hafs-pdf/" + f + "___Hafs39__DM.pdf") :
-							(p + "warsh-pdf/" + f + "___Warsh39__DM.pdf"))
+					(p + qeraat.get(q) + "-mobile-pdf/" + f + "___" + pref.get(q) + "__DM.pdf") :
+					(p + qeraat.get(q) + "-pdf/" + f + "___" + pref.get(q) + "__DM.pdf")
 			));
 			merger.merge(doc, 1, 1);
 			doc.close();
