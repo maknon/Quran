@@ -42,7 +42,6 @@ for ( i = 0; i < files.length; i++ )
 	var file_name = app.activeDocument.name.toString().replace(".ai", "");
 
 	var options = new ExportOptionsPNG8();
-	options.antiAliasing = true;
 	options.transparency = false;
 	//options.colorCount = 8; // Use it for PDF since it reduces the size of 20% and no visual difference when used with background in the PDF
 	options.horizontalScale = 320;

@@ -22,6 +22,7 @@ class QuranPanel extends JFrame
 	private final Vector<Integer> db_height_v = new Vector<>();
 	private final Quran quran;
 	private final JComboBox pageComboBox;
+	int w, h;
 
 	QuranPanel(final Quran q)
 	{
@@ -51,6 +52,7 @@ class QuranPanel extends JFrame
 			}
 		};
 		page.setBorder(null);
+		page.setAutoscrolls(true);
 
 		page.addMouseListener(new MouseListener()
 		{
@@ -93,6 +95,21 @@ class QuranPanel extends JFrame
 				endX = e.getX();
 				endY = e.getY();
 				repaint();
+
+				/* auto scroll while dragging the mouse. Not working well
+				final JViewport viewPort = (JViewport) SwingUtilities.getAncestorOfClass(JViewport.class, page);
+				if (viewPort != null)
+				{
+					final int deltaX = endX - startX;
+					final int deltaY = endY - startY;
+
+					final Rectangle view = viewPort.getViewRect();
+					view.x += deltaX / 10;
+					view.y += deltaY / 10;
+
+					page.scrollRectToVisible(view);
+				}
+				*/
 			}
 
 			public void mouseMoved(MouseEvent e)
@@ -113,7 +130,8 @@ class QuranPanel extends JFrame
 				final int index = ((JComboBox) e.getSource()).getSelectedIndex() + 1;
 				if (index != 0)
 				{
-					page.setIcon(new ImageIcon(pagesFolder + "/" + index + ".png"));
+					final ImageIcon image = new ImageIcon(pagesFolder + "/" + index + ".png");
+					page.setIcon(image);
 					suraComboBox.removeAllItems();
 					db_startX_v.clear();
 					db_startY_v.clear();
@@ -127,6 +145,9 @@ class QuranPanel extends JFrame
 					width_v.clear();
 					height_v.clear();
 
+					w = image.getIconWidth();
+					h = image.getIconHeight();
+
 					try
 					{
 						ResultSet rs = quran.sharedDBConnection.createStatement().executeQuery("SELECT Sura FROM Quran WHERE Page=" + index + " GROUP BY Sura ORDER BY Sura");
@@ -137,16 +158,17 @@ class QuranPanel extends JFrame
 						while (rs.next())
 						{
 							final String l = rs.getString("Location");
-							if (l.length() != 0)
+							if (!l.isEmpty())
 							{
 								final String[] locations = l.split("-");
-								for (String lo : locations)
+								//locations[0] -> w,h
+								for (int i = 1; i < locations.length; i++)
 								{
-									final String[] location = lo.split(",");
-									db_startX_v.add(Integer.valueOf(location[0]));
-									db_startY_v.add(Integer.valueOf(location[1]));
-									db_width_v.add(Integer.valueOf(location[2]));
-									db_height_v.add(Integer.valueOf(location[3]));
+									final String[] location = locations[i].split(",");
+									db_startX_v.add(Integer.parseInt(location[0]));
+									db_startY_v.add(Integer.parseInt(location[1]));
+									db_width_v.add(Integer.parseInt(location[2]));
+									db_height_v.add(Integer.parseInt(location[3]));
 								}
 							}
 						}
@@ -186,9 +208,9 @@ class QuranPanel extends JFrame
 			{
 				if (!startX_v.isEmpty())
 				{
-					String location = startX_v.elementAt(0) + "," + startY_v.elementAt(0) + ',' + width_v.elementAt(0) + ',' + height_v.elementAt(0);
-					for (int i = 1; i < startX_v.size(); i++)
-						location = location + '-' + startX_v.elementAt(i) + ',' + startY_v.elementAt(i) + ',' + width_v.elementAt(i) + ',' + height_v.elementAt(i);
+					String location = w + "," + h;
+					for (int i = 0; i < startX_v.size(); i++)
+						location = location + '-' + startX_v.elementAt(i) + "," + startY_v.elementAt(i) + ',' + width_v.elementAt(i) + ',' + height_v.elementAt(i);
 
 					final String suraName = (String) suraComboBox.getSelectedItem();
 					final String ayaNumber = (String) ayaComboBox.getSelectedItem();
@@ -388,16 +410,17 @@ class QuranPanel extends JFrame
 			while (rs.next())
 			{
 				final String l = rs.getString("Location");
-				if (l.length() != 0)
+				if (!l.isEmpty())
 				{
 					final String[] locations = l.split("-");
-					for (String lo : locations)
+					//locations[0] -> w,h
+					for (int i = 1; i < locations.length; i++)
 					{
-						final String[] location = lo.split(",");
-						db_startX_v.add(Integer.valueOf(location[0]));
-						db_startY_v.add(Integer.valueOf(location[1]));
-						db_width_v.add(Integer.valueOf(location[2]));
-						db_height_v.add(Integer.valueOf(location[3]));
+						final String[] location = locations[i].split(",");
+						db_startX_v.add(Integer.parseInt(location[0]));
+						db_startY_v.add(Integer.parseInt(location[1]));
+						db_width_v.add(Integer.parseInt(location[2]));
+						db_height_v.add(Integer.parseInt(location[3]));
 					}
 				}
 			}

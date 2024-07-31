@@ -4,6 +4,7 @@ import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.cos.COSDictionary;
 import org.apache.pdfbox.cos.COSStream;
 import org.apache.pdfbox.io.MemoryUsageSetting;
+import org.apache.pdfbox.io.RandomAccessStreamCache;
 import org.apache.pdfbox.multipdf.PDFMergerUtility;
 import org.apache.pdfbox.pdmodel.*;
 import org.apache.pdfbox.pdmodel.common.PDMetadata;
@@ -30,7 +31,7 @@ import java.util.Calendar;
 import static classes.CreatePDF_QuranDb.*;
 
 // https://github.com/apache/pdfbox/blob/trunk/examples/src/main/java/org/apache/pdfbox/examples/util/PDFMergerExample.java
-// Use iText version, it gives more options to control the viewer settings and meta data
+// Use iText version, it gives more options to control the viewer settings and metadata
 public class CreatePDF_PdfBox_Pdf
 {
 	final static boolean mobile = false;
@@ -68,7 +69,8 @@ public class CreatePDF_PdfBox_Pdf
 				));
 			}
 
-			pdfMerger.mergeDocuments(MemoryUsageSetting.setupMainMemoryOnly());
+			//pdfMerger.mergeDocuments(MemoryUsageSetting.setupMainMemoryOnly());
+			pdfMerger.mergeDocuments(null);
 
 			final PDDocument document = Loader.loadPDF(new File(p + "temp.pdf"));
 
@@ -160,7 +162,7 @@ public class CreatePDF_PdfBox_Pdf
 		final XMPMetadata xmpMetadata = XMPMetadata.createXMPMetadata();
 
 		// PDF/A-1b properties
-		final PDFAIdentificationSchema pdfaSchema = xmpMetadata.createAndAddPFAIdentificationSchema();
+		final PDFAIdentificationSchema pdfaSchema = xmpMetadata.createAndAddPDFAIdentificationSchema();
 		pdfaSchema.setPart(1);
 		pdfaSchema.setConformance("B");
 

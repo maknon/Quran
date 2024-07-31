@@ -157,7 +157,7 @@ public class CreatePDF_PdfBox_Png
 		final XMPMetadata xmpMetadata = XMPMetadata.createXMPMetadata();
 
 		// PDF/A-1b properties
-		final PDFAIdentificationSchema pdfaSchema = xmpMetadata.createAndAddPFAIdentificationSchema();
+		final PDFAIdentificationSchema pdfaSchema = xmpMetadata.createAndAddPDFAIdentificationSchema();
 		pdfaSchema.setPart(1);
 		pdfaSchema.setConformance("B");
 

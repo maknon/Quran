@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="org.apache.lucene:lucene-queryparser" type="repository">
-    <properties maven-id="org.apache.lucene:lucene-queryparser:9.1.0" />
+    <properties maven-id="org.apache.lucene:lucene-queryparser:9.9.2" />
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/lucene-queryparser-9.1.0.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/lucene-core-9.1.0.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/lucene-queries-9.1.0.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/lucene-sandbox-9.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lucene-queryparser-9.9.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lucene-core-9.9.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lucene-queries-9.9.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lucene-sandbox-9.9.2.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

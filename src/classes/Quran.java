@@ -1224,93 +1224,96 @@ class Quran extends JFrame
 					final int sura = rs.getInt("Sura");
 					final int hezp = rs.getInt("Hezp");
 
-					final StringTokenizer tokens = new StringTokenizer(rs.getString("Location"), "-");
-					final int count = tokens.countTokens();
-
-					final int[] x = new int[count];
-					final int[] y = new int[count];
-					final int[] width = new int[count];
-					final int[] height = new int[count];
-
-					for (int i = 0; i < count; i++)
+					final String s = rs.getString("Location");
+					if(!s.isEmpty())
 					{
-						final StringTokenizer dimensions = new StringTokenizer(tokens.nextToken(), ",");
-						if (dimensions.hasMoreTokens())
+						final StringTokenizer tokens = new StringTokenizer(s, "-");
+						tokens.nextToken(); // To remove the first token which includes w / h, since the PC version has the same image size so no need for this info now. It is used for the android vector version
+						final int count = tokens.countTokens();
+
+						final int[] x = new int[count];
+						final int[] y = new int[count];
+						final int[] width = new int[count];
+						final int[] height = new int[count];
+						for (int i = 0; i < count; i++)
 						{
-							x[i] = Integer.parseInt(dimensions.nextToken());
-							y[i] = Integer.parseInt(dimensions.nextToken());
-							width[i] = Integer.parseInt(dimensions.nextToken());
-							height[i] = Integer.parseInt(dimensions.nextToken());
-							ayaLabels.add(sura + "-" + aya);
-							ayaRectangles.add(new Rectangle(x[i], y[i], width[i], height[i]));
+							final StringTokenizer dimensions = new StringTokenizer(tokens.nextToken(), ",");
+							if (dimensions.hasMoreTokens())
+							{
+								x[i] = Integer.parseInt(dimensions.nextToken());
+								y[i] = Integer.parseInt(dimensions.nextToken());
+								width[i] = Integer.parseInt(dimensions.nextToken());
+								height[i] = Integer.parseInt(dimensions.nextToken());
+								ayaLabels.add(sura + "-" + aya);
+								ayaRectangles.add(new Rectangle(x[i], y[i], width[i], height[i]));
+							}
 						}
-					}
 
-					for (int i = 0; i < count; i++)
-					{
-						final JPanel a = new JPanel();
-						a.setBounds(x[i], y[i], width[i], height[i]);
-						add(a);
-						a.setOpaque(false);
-						a.addMouseListener(new MouseAdapter()
+						for (int i = 0; i < count; i++)
 						{
-							public void mouseClicked(MouseEvent e)
+							final JPanel a = new JPanel();
+							a.setBounds(x[i], y[i], width[i], height[i]);
+							add(a);
+							a.setOpaque(false);
+							a.addMouseListener(new MouseAdapter()
 							{
-								if ((e.getModifiers() & InputEvent.BUTTON1_MASK) == InputEvent.BUTTON1_MASK)
-								//if(SwingUtilities.isLeftMouseButton(e))
+								public void mouseClicked(MouseEvent e)
 								{
-									selectedByMouse = true;
-									selectedBySuraButton = false;
-									selectedByPageButton = false;
-									selectedByAyaButton = false;
-									selectedByHezpButton = false;
-									selectedByJozButton = false;
-									selectedByTahfeed = false;
-									selectedBySearch = false;
-									selectedSura = sura;
-									selectedHezp = hezp;
-									SelectionThread(aya);
-								}
-							}
-
-							public void mouseEntered(MouseEvent e)
-							{
-								if (aya != (ayaComboBox.getSelectedIndex() + 1) || sura != (suraComboBox.getSelectedIndex() + 1))
-								{
-									for (int j = 0; j < count; j++)
-										imageGraphics.drawImage(rolloverImage.getSubimage(x[j], y[j], width[j], height[j]), x[j], y[j], null);
-									repaint();
-								}
-							}
-
-							public void mouseExited(MouseEvent e)
-							{
-								if (aya != (ayaComboBox.getSelectedIndex() + 1) || sura != (suraComboBox.getSelectedIndex() + 1))
-								{
-									for (int j = 0; j < count; j++)
-										imageGraphics.drawImage(baseImage.getSubimage(x[j], y[j], width[j], height[j]), x[j], y[j], null);
-									repaint();
-								}
-							}
-
-							public void mouseReleased(final MouseEvent e)
-							{
-								final Thread thread = new Thread()
-								{
-									public void run()
+									if ((e.getModifiers() & InputEvent.BUTTON1_MASK) == InputEvent.BUTTON1_MASK)
+									//if(SwingUtilities.isLeftMouseButton(e))
 									{
-										if ((e.getModifiers() & InputEvent.BUTTON3_MASK) == InputEvent.BUTTON3_MASK)
-										//if(SwingUtilities.isRightMouseButton(e)) // It works as well
+										selectedByMouse = true;
+										selectedBySuraButton = false;
+										selectedByPageButton = false;
+										selectedByAyaButton = false;
+										selectedByHezpButton = false;
+										selectedByJozButton = false;
+										selectedByTahfeed = false;
+										selectedBySearch = false;
+										selectedSura = sura;
+										selectedHezp = hezp;
+										SelectionThread(aya);
+									}
+								}
+
+								public void mouseEntered(MouseEvent e)
+								{
+									if (aya != (ayaComboBox.getSelectedIndex() + 1) || sura != (suraComboBox.getSelectedIndex() + 1))
+									{
+										for (int j = 0; j < count; j++)
+											imageGraphics.drawImage(rolloverImage.getSubimage(x[j], y[j], width[j], height[j]), x[j], y[j], null);
+										repaint();
+									}
+								}
+
+								public void mouseExited(MouseEvent e)
+								{
+									if (aya != (ayaComboBox.getSelectedIndex() + 1) || sura != (suraComboBox.getSelectedIndex() + 1))
+									{
+										for (int j = 0; j < count; j++)
+											imageGraphics.drawImage(baseImage.getSubimage(x[j], y[j], width[j], height[j]), x[j], y[j], null);
+										repaint();
+									}
+								}
+
+								public void mouseReleased(final MouseEvent e)
+								{
+									final Thread thread = new Thread()
+									{
+										public void run()
 										{
-											try
+											if ((e.getModifiers() & InputEvent.BUTTON3_MASK) == InputEvent.BUTTON3_MASK)
+											//if(SwingUtilities.isRightMouseButton(e)) // It works as well
 											{
-												final JPopupMenu tafseerPopupMenu = new JPopupMenu();
-												final Statement stmt = sharedDBConnection.createStatement();
-												int i = tafseerComboBox.getSelectedIndex() + 1;
-												String t = (i < 10 ? "0" : "") + i;
-												ResultSet rs = stmt.executeQuery((language ? ("SELECT Tafseer FROM ar_" + t) : ("SELECT Translations FROM en_" + t)) + " WHERE Sura=" + sura + " AND Aya=" + aya);
-												if (rs.next())
+												try
 												{
+													final JPopupMenu tafseerPopupMenu = new JPopupMenu();
+													final Statement stmt = sharedDBConnection.createStatement();
+													int i = tafseerComboBox.getSelectedIndex() + 1;
+													String t = (i < 10 ? "0" : "") + i;
+													ResultSet rs = stmt.executeQuery((language ? ("SELECT Tafseer FROM ar_" + t) : ("SELECT Translations FROM en_" + t)) + " WHERE Sura=" + sura + " AND Aya=" + aya);
+													if (rs.next())
+													{
 	                                                /*
                                                     final ResultSetMetaData rsMetaData = rs.getMetaData();
                                                     final int numberOfColumns = rsMetaData.getColumnCount();
@@ -1326,38 +1329,7 @@ class Quran extends JFrame
                                                             final Reader description = rs.getCharacterStream(i);
                                                             */
 
-															final JMenu tafseerMenuItem = new JMenu(language ? "التفسير" : "Translation");
-															final Reader description = rs.getCharacterStream(1);
-
-															final char[] arr = new char[4 * 1024]; // 4K at a time
-															final StringBuilder buf = new StringBuilder();
-															int numChars;
-
-															while ((numChars = description.read(arr, 0, arr.length)) > 0)
-																buf.append(arr, 0, numChars);
-
-															final JTextArea tafseerTextArea = new JTextArea(buf.toString());
-															tafseerTextArea.setLineWrap(true);
-															tafseerTextArea.setWrapStyleWord(true);
-															tafseerTextArea.setEnabled(false);
-															//tafseerTextArea.setFont(new Font("KFGQPC Uthman Taha Naskh", Font.PLAIN, 24));
-															tafseerTextArea.setFont(new Font("Scheherazade New", Font.PLAIN, 24)); // Version 2.1
-															final JScrollPane sp = new JScrollPane(tafseerTextArea);
-															sp.setPreferredSize(new Dimension(800, 400));
-															tafseerMenuItem.add(sp);
-															tafseerPopupMenu.add(tafseerMenuItem);
-													    //}
-													//}
-												}
-
-												if (language)
-												{
-													i = eerabComboBox.getSelectedIndex() + 1;
-													t = (i < 10 ? "0" : "") + i;
-													rs = stmt.executeQuery("SELECT Eerab FROM er_" + t + " WHERE Sura=" + sura + " AND Aya=" + aya);
-													if (rs.next())
-													{
-														final JMenu eerabMenuItem = new JMenu("الإعراب");
+														final JMenu tafseerMenuItem = new JMenu(language ? "التفسير" : "Translation");
 														final Reader description = rs.getCharacterStream(1);
 
 														final char[] arr = new char[4 * 1024]; // 4K at a time
@@ -1367,47 +1339,78 @@ class Quran extends JFrame
 														while ((numChars = description.read(arr, 0, arr.length)) > 0)
 															buf.append(arr, 0, numChars);
 
-														final JTextArea eerabTextArea = new JTextArea(buf.toString());
-														eerabTextArea.setLineWrap(true);
-														eerabTextArea.setWrapStyleWord(true);
-														eerabTextArea.setEnabled(false);
-														//eerabTextArea.setFont(new Font("KFGQPC Uthman Taha Naskh", Font.PLAIN, 24));
-														eerabTextArea.setFont(new Font("Scheherazade New", Font.PLAIN, 24)); // Version 2.1
-
-														final JScrollPane sp = new JScrollPane(eerabTextArea);
-														sp.setPreferredSize(new Dimension(600, 300));
-														eerabMenuItem.add(sp);
-														tafseerPopupMenu.add(eerabMenuItem);
+														final JTextArea tafseerTextArea = new JTextArea(buf.toString());
+														tafseerTextArea.setLineWrap(true);
+														tafseerTextArea.setWrapStyleWord(true);
+														tafseerTextArea.setEnabled(false);
+														//tafseerTextArea.setFont(new Font("KFGQPC Uthman Taha Naskh", Font.PLAIN, 24));
+														tafseerTextArea.setFont(new Font("Scheherazade New", Font.PLAIN, 24)); // Version 2.1
+														final JScrollPane sp = new JScrollPane(tafseerTextArea);
+														sp.setPreferredSize(new Dimension(800, 400));
+														tafseerMenuItem.add(sp);
+														tafseerPopupMenu.add(tafseerMenuItem);
+														//}
+														//}
 													}
-												}
 
-												if (tafseerPopupMenu.getSubElements().length != 0)
-												{
-													SwingUtilities.invokeLater(() ->
+													if (language)
 													{
-														if (language)
+														i = eerabComboBox.getSelectedIndex() + 1;
+														t = (i < 10 ? "0" : "") + i;
+														rs = stmt.executeQuery("SELECT Eerab FROM er_" + t + " WHERE Sura=" + sura + " AND Aya=" + aya);
+														if (rs.next())
 														{
-															tafseerPopupMenu.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-															tafseerPopupMenu.updateUI(); // For getPreferredSize() to return correct value
-															tafseerPopupMenu.show(a, e.getX() - tafseerPopupMenu.getPreferredSize().width + 2, e.getY());
-														}
-														else
-															tafseerPopupMenu.show(a, e.getX(), e.getY());
-													});
-												}
+															final JMenu eerabMenuItem = new JMenu("الإعراب");
+															final Reader description = rs.getCharacterStream(1);
 
-												stmt.close();
-											}
-											catch (Exception ex)
-											{
-												ex.printStackTrace();
+															final char[] arr = new char[4 * 1024]; // 4K at a time
+															final StringBuilder buf = new StringBuilder();
+															int numChars;
+
+															while ((numChars = description.read(arr, 0, arr.length)) > 0)
+																buf.append(arr, 0, numChars);
+
+															final JTextArea eerabTextArea = new JTextArea(buf.toString());
+															eerabTextArea.setLineWrap(true);
+															eerabTextArea.setWrapStyleWord(true);
+															eerabTextArea.setEnabled(false);
+															//eerabTextArea.setFont(new Font("KFGQPC Uthman Taha Naskh", Font.PLAIN, 24));
+															eerabTextArea.setFont(new Font("Scheherazade New", Font.PLAIN, 24)); // Version 2.1
+
+															final JScrollPane sp = new JScrollPane(eerabTextArea);
+															sp.setPreferredSize(new Dimension(600, 300));
+															eerabMenuItem.add(sp);
+															tafseerPopupMenu.add(eerabMenuItem);
+														}
+													}
+
+													if (tafseerPopupMenu.getSubElements().length != 0)
+													{
+														SwingUtilities.invokeLater(() ->
+														{
+															if (language)
+															{
+																tafseerPopupMenu.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+																tafseerPopupMenu.updateUI(); // For getPreferredSize() to return correct value
+																tafseerPopupMenu.show(a, e.getX() - tafseerPopupMenu.getPreferredSize().width + 2, e.getY());
+															}
+															else
+																tafseerPopupMenu.show(a, e.getX(), e.getY());
+														});
+													}
+
+													stmt.close();
+												} catch (Exception ex)
+												{
+													ex.printStackTrace();
+												}
 											}
 										}
-									}
-								};
-								thread.start();
-							}
-						});
+									};
+									thread.start();
+								}
+							});
+						}
 					}
 				}
 			}

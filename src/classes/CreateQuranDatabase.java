@@ -21,12 +21,12 @@ public class CreateQuranDatabase
 			Class.forName("org.apache.derby.jdbc.EmbeddedDriver").getDeclaredConstructor().newInstance();
 			Class.forName("org.h2.Driver");
 
-			final Connection accessCon = DriverManager.getConnection("jdbc:ucanaccess://E:/Quran Media/DB/qurandb-1.mdb;singleconnection=true");
+			final Connection accessCon = DriverManager.getConnection("jdbc:ucanaccess://E:/Quran Media/DB/qurandb-2.mdb;singleconnection=true");
 			final Connection accessCon_en_sahih = DriverManager.getConnection("jdbc:ucanaccess://E:/Quran Media/DB/en_sahih.mdb;singleconnection=true");
 			final Connection accessCon_baghawy = DriverManager.getConnection("jdbc:ucanaccess://E:/Quran Media/DB/baghawy.mdb;singleconnection=true");
 			final Connection accessCon_tabary = DriverManager.getConnection("jdbc:ucanaccess://E:/Quran Media/DB/tabary.mdb;singleconnection=true");
 			final Connection accessCon_sa3dy = DriverManager.getConnection("jdbc:ucanaccess://E:/Quran Media/DB/sa3dy.mdb;singleconnection=true");
-			final Connection accessCon_alnoor = DriverManager.getConnection("jdbc:ucanaccess://E:/Quran Media/DB/quran_alnoor.mdb;singleconnection=true");
+			final Connection accessCon_alnoor = DriverManager.getConnection("jdbc:ucanaccess://E:/Quran Media/DB/quran.mdb;singleconnection=true");
 			final Connection h2Con = DriverManager.getConnection("jdbc:h2:./db/quranDatabase");
 			final Connection derbyCon = DriverManager.getConnection("jdbc:derby:db.derby;create=true");
 
@@ -36,8 +36,8 @@ public class CreateQuranDatabase
 
 			final Statement h2Stmt = h2Con.createStatement();
 			final Statement derbyStmt = derbyCon.createStatement();
-			h2Stmt.executeUpdate("CREATE TABLE Quran(Page INTEGER, Sura INTEGER, Aya INTEGER, Hezp INTEGER, Part INTEGER, Location VARCHAR(150), Verse VARCHAR(1200))");
-			derbyStmt.executeUpdate("CREATE TABLE Quran(Page INTEGER, Sura INTEGER, Aya INTEGER, Hezp INTEGER, Part INTEGER, Location VARCHAR(150), Verse VARCHAR(1200))");
+			h2Stmt.executeUpdate("CREATE TABLE Quran(Page INTEGER, Sura INTEGER, Aya INTEGER, Hezp INTEGER, Part INTEGER, Location VARCHAR(800), Verse VARCHAR(1200))");
+			derbyStmt.executeUpdate("CREATE TABLE Quran(Page INTEGER, Sura INTEGER, Aya INTEGER, Hezp INTEGER, Part INTEGER, Location VARCHAR(800), Verse VARCHAR(1200))");
 
 			h2Stmt.execute("CREATE TABLE Tafseer(TableName VARCHAR(5), Tafseer VARCHAR(100))"); // TableName is integer to get the name from the ComboBox index directly. It will be used in sorting the results so that tafseer will be in order
 			derbyStmt.execute("CREATE TABLE Tafseer(TableName VARCHAR(5), Tafseer VARCHAR(100))");

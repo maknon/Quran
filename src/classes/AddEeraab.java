@@ -18,7 +18,7 @@ public class AddEeraab
 
 			for (int j = 1; j <= 1; j++)
 			{
-				final Connection conAccess = DriverManager.getConnection("jdbc:ucanaccess://E:/Quran Media/DB/Eeraab" + j + ".mdb;singleconnection=true");
+				final Connection conAccess = DriverManager.getConnection("jdbc:ucanaccess://E:/Quran Media/DB/Eeraab" + j + ".accdb;singleconnection=true");
 				final String t = (j < 10 ? "0" : "") + j;
 				stmtH2_1.executeUpdate("CREATE TABLE er_" + t + "(Sura INTEGER, Aya INTEGER, Eerab CLOB(65536))");
 				stmtH2_1.execute("CREATE INDEX AyaIndex_er_" + t + " ON er_" + t + "(Aya)");
