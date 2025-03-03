@@ -7,23 +7,21 @@
   <chdir>.</chdir>
   <priority>normal</priority>
   <downloadUrl>https://www.oracle.com/java/technologies/javase-downloads.html</downloadUrl>
-  <supportUrl>http://www.maknoon.com</supportUrl>
+  <supportUrl>https://www.maknoon.com</supportUrl>
   <stayAlive>false</stayAlive>
   <icon>images_X\icon\icon.ico</icon>
   <jre>
-        <path>jdk</path>
-        <bundledJre64Bit>true</bundledJre64Bit>
-        <bundledJreAsFallback>false</bundledJreAsFallback>
-        <jdkPreference>jdkOnly</jdkPreference>
-        <runtimeBits>64</runtimeBits>
-    </jre>
+    <path>jdk</path>
+    <requires64Bit>true</requires64Bit>
+    <requiresJdk>true</requiresJdk>
+  </jre>
   <versionInfo>
-    <fileVersion>2.1.0.0</fileVersion>
-    <txtFileVersion>2.1</txtFileVersion>
+    <fileVersion>2.2.0.0</fileVersion>
+    <txtFileVersion>2.2</txtFileVersion>
     <fileDescription>»—‰«„Ã «·ﬁ—¬‰ «·ﬂ—Ì„</fileDescription>
-    <copyright>©2021 Maknoon Apps</copyright>
-    <productVersion>2.1.0.0</productVersion>
-    <txtProductVersion>2.1</txtProductVersion>
+    <copyright>©2024 Maknoon Apps</copyright>
+    <productVersion>2.2.0.0</productVersion>
+    <txtProductVersion>2.2</txtProductVersion>
     <productName>»—‰«„Ã «·ﬁ—¬‰ «·ﬂ—Ì„</productName>
     <companyName>»—«„Ã „ﬂ‰Ê‰</companyName>
     <internalName>The Holy Quran</internalName>

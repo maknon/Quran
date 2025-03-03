@@ -1,19 +1,11 @@
 <component name="libraryTable">
   <library name="org.apache.pdfbox:pdfbox" type="repository">
-    <properties maven-id="org.apache.pdfbox:pdfbox:3.0.1" />
+    <properties maven-id="org.apache.pdfbox:pdfbox:3.0.2" />
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/apache/pdfbox/pdfbox/3.0.1/pdfbox-3.0.1.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/apache/pdfbox/pdfbox-io/3.0.1/pdfbox-io-3.0.1.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/apache/pdfbox/fontbox/3.0.1/fontbox-3.0.1.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.2/commons-logging-1.2.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.10.1/junit-jupiter-5.10.1.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.10.1/junit-jupiter-api-5.10.1.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.10.1/junit-platform-commons-1.10.1.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-params/5.10.1/junit-jupiter-params-5.10.1.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-engine/5.10.1/junit-jupiter-engine-5.10.1.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.10.1/junit-platform-engine-1.10.1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/pdfbox/pdfbox/3.0.2/pdfbox-3.0.2.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/pdfbox/pdfbox-io/3.0.2/pdfbox-io-3.0.2.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/pdfbox/fontbox/3.0.2/fontbox-3.0.2.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.3.0/commons-logging-1.3.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="org.apache.lucene:lucene-analysis-common" type="repository">
-    <properties maven-id="org.apache.lucene:lucene-analysis-common:9.9.2" />
+    <properties maven-id="org.apache.lucene:lucene-analysis-common:9.11.1" />
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/lucene-analysis-common-9.9.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/lucene-core-9.9.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lucene-analysis-common-9.11.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/lucene-core-9.11.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

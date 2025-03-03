@@ -6,9 +6,9 @@
 	<property name="tools.dir"				value="E:\Support"/>
 	<property name="makensis.exe"			value="${tools.dir}\nsis\makensis.exe"/>
 	<property name="launch4j.jar"			value="${tools.dir}\launch4j\launch4j.jar"/>
-	<property name="jdk.linux"				value="openjdk-17_linux-x64_bin.tar.gz"/>
-	<property name="jdk.mac"				value="openjdk-17_macos-x64_bin.tar.gz"/>
-	<property name="jdk.win"				value="openjdk-17_windows-x64_bin.zip"/>
+	<property name="jdk.linux"				value="openjdk-21_linux-x64_bin.tar.gz"/>
+	<property name="jdk.mac"				value="openjdk-21_macos-x64_bin.tar.gz"/>
+	<property name="jdk.win"				value="openjdk-21_windows-x64_bin.zip"/>
 
 	<path id="class.path">
 		<fileset dir="${build.dir}" includes="lib/*"/>

@@ -52,7 +52,7 @@ public class CreateSQLiteDB
             final FileWriter fw = new FileWriter(String.valueOf(i), true);
             final BufferedWriter bw = new BufferedWriter(fw);
 
-            final ResultSet rs1 = sharedDBConnection.createStatement().executeQuery("SELECT * FROM Quran WHERE Page=" + i);
+            final ResultSet rs1 = sharedDBConnection.createStatement().executeQuery("SELECT * FROM Quran WHERE Page=" + i  + " ORDER BY Sura, Aya");
             while (rs1.next())
             {
                 final int aya = rs1.getInt("Aya");

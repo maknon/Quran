@@ -21,7 +21,7 @@ class QuranPanel extends JFrame
 	private final Vector<Integer> db_width_v = new Vector<>();
 	private final Vector<Integer> db_height_v = new Vector<>();
 	private final Quran quran;
-	private final JComboBox pageComboBox;
+	private final JComboBox<?> pageComboBox;
 	int w, h;
 
 	QuranPanel(final Quran q)
@@ -127,7 +127,7 @@ class QuranPanel extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				final int index = ((JComboBox) e.getSource()).getSelectedIndex() + 1;
+				final int index = ((JComboBox<?>) e.getSource()).getSelectedIndex() + 1;
 				if (index != 0)
 				{
 					final ImageIcon image = new ImageIcon(pagesFolder + "/" + index + ".png");
@@ -153,6 +153,7 @@ class QuranPanel extends JFrame
 						ResultSet rs = quran.sharedDBConnection.createStatement().executeQuery("SELECT Sura FROM Quran WHERE Page=" + index + " GROUP BY Sura ORDER BY Sura");
 						while (rs.next())
 							suraComboBox.addItem(suraNames[rs.getInt("Sura") - 1]);
+						rs.close();
 
 						rs = quran.sharedDBConnection.createStatement().executeQuery("SELECT Location FROM Quran WHERE Page=" + index);
 						while (rs.next())
@@ -172,6 +173,7 @@ class QuranPanel extends JFrame
 								}
 							}
 						}
+						rs.close();
 					}
 					catch (Exception ex)
 					{
@@ -183,16 +185,17 @@ class QuranPanel extends JFrame
 
 		suraComboBox.addActionListener((e) ->
 		{
-			final int index = ((JComboBox) e.getSource()).getSelectedIndex();
+			final int index = ((JComboBox<?>) e.getSource()).getSelectedIndex();
 			if (index != -1)
 			{
 				ayaComboBox.removeAllItems();
 				try
 				{
-					final String suraName = (String) ((JComboBox) e.getSource()).getSelectedItem();
+					final String suraName = (String) ((JComboBox<?>) e.getSource()).getSelectedItem();
 					final ResultSet rs = quran.sharedDBConnection.createStatement().executeQuery("SELECT Aya FROM Quran WHERE Page=" + (pageComboBox.getSelectedIndex() + 1) + " AND Sura=" + suraName.split("-")[0] + " GROUP BY Aya ORDER BY Aya");
 					while (rs.next())
 						ayaComboBox.addItem("الآية " + rs.getInt("Aya"));
+					rs.close();
 				}
 				catch (Exception ex)
 				{

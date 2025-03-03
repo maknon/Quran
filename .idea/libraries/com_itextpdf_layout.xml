@@ -1,12 +1,12 @@
 <component name="libraryTable">
   <library name="com.itextpdf:layout" type="repository">
-    <properties maven-id="com.itextpdf:layout:8.0.3" />
+    <properties maven-id="com.itextpdf:layout:8.0.5" />
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/itextpdf/layout/8.0.3/layout-8.0.3.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/com/itextpdf/kernel/8.0.3/kernel-8.0.3.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/com/itextpdf/bouncy-castle-connector/8.0.3/bouncy-castle-connector-8.0.3.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/com/itextpdf/io/8.0.3/io-8.0.3.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/com/itextpdf/commons/8.0.3/commons-8.0.3.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/itextpdf/layout/8.0.5/layout-8.0.5.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/itextpdf/kernel/8.0.5/kernel-8.0.5.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/itextpdf/io/8.0.5/io-8.0.5.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/itextpdf/commons/8.0.5/commons-8.0.5.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/itextpdf/bouncy-castle-connector/8.0.5/bouncy-castle-connector-8.0.5.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar!/" />
     </CLASSES>
     <JAVADOC />

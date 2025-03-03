@@ -209,7 +209,7 @@ class Quran extends JFrame
 			if (language)
 			{
 				props.load(new InputStreamReader(new FileInputStream("setting/sheekh_ar.properties"), StandardCharsets.UTF_8));
-				final Enumeration e = props.propertyNames();
+				final Enumeration<?> e = props.propertyNames();
 
 				while (e.hasMoreElements())
 				{
@@ -231,7 +231,7 @@ class Quran extends JFrame
 			else
 			{
 				props.load(new FileInputStream("setting/sheekh_en.properties"));
-				final Enumeration e = props.propertyNames();
+				final Enumeration<?> e = props.propertyNames();
 
 				while (e.hasMoreElements())
 				{
@@ -379,7 +379,7 @@ class Quran extends JFrame
 		sheekhComboBox.addActionListener((e) -> ayaComboBox.setSelectedIndex(ayaComboBox.getSelectedIndex()));
 		suraComboBox.addActionListener((e) ->
 		{
-			final int index = ((JComboBox) e.getSource()).getSelectedIndex();
+			final int index = ((JComboBox<?>) e.getSource()).getSelectedIndex();
 			if (index != -1 && !cancelSuraListener)
 			{
 				selectedBySuraButton = true;
@@ -412,7 +412,7 @@ class Quran extends JFrame
 
 		ayaComboBox.addActionListener((e) ->
 		{
-			final int index = ((JComboBox) e.getSource()).getSelectedIndex();
+			final int index = ((JComboBox<?>) e.getSource()).getSelectedIndex();
 			if (index != -1 && !cancelAyaListener)
 			{
 				selectedByAyaButton = true;
@@ -445,7 +445,7 @@ class Quran extends JFrame
 
 		pageComboBox.addActionListener((e) ->
 		{
-			final int index = ((JComboBox) e.getSource()).getSelectedIndex();
+			final int index = ((JComboBox<?>) e.getSource()).getSelectedIndex();
 			if (index != -1 && !cancelPageListener)
 			{
 				selectedByPageButton = true;
@@ -478,7 +478,7 @@ class Quran extends JFrame
 
 		jozComboBox.addActionListener((e) ->
 		{
-			final int index = ((JComboBox) e.getSource()).getSelectedIndex();
+			final int index = ((JComboBox<?>) e.getSource()).getSelectedIndex();
 			if (index != -1 && !cancelJozListener)
 			{
 				selectedByJozButton = true;
@@ -511,7 +511,7 @@ class Quran extends JFrame
 
 		hezpComboBox.addActionListener((e) ->
 		{
-			final int index = ((JComboBox) e.getSource()).getSelectedIndex();
+			final int index = ((JComboBox<?>) e.getSource()).getSelectedIndex();
 			if (index != -1 && !cancelHezpListener)
 			{
 				selectedByHezpButton = true;
@@ -591,7 +591,7 @@ class Quran extends JFrame
 		{
 			try
 			{
-				final int index = ((JComboBox) e.getSource()).getSelectedIndex() + 1;
+				final int index = ((JComboBox<?>) e.getSource()).getSelectedIndex() + 1;
 				final ResultSet rs = sharedDBConnection.createStatement().executeQuery("SELECT MAX(Aya) AS AyaCount FROM Quran WHERE Sura=" + index);
 				rs.next();
 				final int ayaCount = rs.getInt("AyaCount");
@@ -610,7 +610,7 @@ class Quran extends JFrame
 		{
 			try
 			{
-				final int index = ((JComboBox) e.getSource()).getSelectedIndex() + 1;
+				final int index = ((JComboBox<?>) e.getSource()).getSelectedIndex() + 1;
 				final ResultSet rs = sharedDBConnection.createStatement().executeQuery("SELECT MAX(Aya) AS AyaCount FROM Quran WHERE Sura=" + index);
 				rs.next();
 				final int ayaCount = rs.getInt("AyaCount");
